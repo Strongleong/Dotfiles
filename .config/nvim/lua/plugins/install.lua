@@ -32,7 +32,7 @@ return packer.startup(function(use)
   use 'tpope/vim-commentary'
   use 'tpope/vim-surround'
   use 'karb94/neoscroll.nvim'
-  use 'intrntbrn/awesomewm-vim-tmux-navigator'
+  use 'alexghergh/nvim-tmux-navigation'
   use 'lyokha/vim-xkbswitch'
   use 'goolord/alpha-nvim'
   use 'BlakeJC94/alpha-nvim-fortune'

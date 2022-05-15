@@ -1,5 +1,11 @@
 local M = {}
 
+local status_ok, tmux = pcall(require, "nvim-tmux-navigation")
+if not status_ok then
+	vim.notify('Error. nvim-tmux-navigation is not installed')
+	return
+end
+
 local map = vim.keymap.set
 
 --  Mode  Keys          Command                             Args
@@ -16,6 +22,13 @@ map('i', 'jk',         '<ESC>',                            {silent = true, desc=
 
 map('v', '>',          '>gv',                              {silent = true, desc = 'Intent in visual mode vithout leaving to normal mode'})
 map('v', '<',          '<gv',                              {silent = true, desc = 'Unintent in visual mode vithout leaving to normal mode'})
+
+map('n', "<C-h>",     tmux.NvimTmuxNavigateLeft,           { silent = true, desc = 'Move left' })
+map('n', "<C-j>",     tmux.NvimTmuxNavigateDown,           { silent = true, desc = 'Move down' })
+map('n', "<C-k>",     tmux.NvimTmuxNavigateUp,             { silent = true, desc = 'Move up' })
+map('n', "<C-l>",     tmux.NvimTmuxNavigateRight,          { silent = true, desc = 'Move Right' })
+map('n', "<C-\\>",    tmux.NvimTmuxNavigateLastActive,     { silent = true, desc = 'Move last active' })
+map('n', "<C-Space>", tmux.NvimTmuxNavigateNext,           { silent = true, desc = 'Move next' })
 
 map('n', '<A-j>',      ':MoveLine(1)<CR>',                 {silent = true, desc = 'Move line down'})
 map('n', '<A-k>',      ':MoveLine(-1)<CR>',                {silent = true, desc = 'Move line up'})
