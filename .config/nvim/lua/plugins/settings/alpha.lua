@@ -22,13 +22,14 @@ end
 RandomTitle()
 
 dashboard.section.buttons.val = {
-	dashboard.button("f", "  Find file",           ":Telescope find_files <CR>"         ),
-	dashboard.button("e", "  New file",            ":ene <BAR> startinsert <CR>"        ),
-	dashboard.button("r", "  Recently used files", ":Telescope oldfiles <CR>"           ),
-	dashboard.button("t", "  Find text",           ":Telescope live_grep <CR>"          ),
-	dashboard.button("c", "  Configuration",       ":tabnew ~/.config/nvim/<CR>"        ),
+	dashboard.button("f", "  Find file",           ":Telescope find_files <CR>"           ),
+	dashboard.button("e", "  New file",            ":ene <BAR> startinsert <CR>"          ),
+	dashboard.button("r", "  Recently used files", ":Telescope oldfiles <CR>"             ),
+	dashboard.button("t", "  Find text",           ":Telescope live_grep <CR>"            ),
+	dashboard.button("c", "  Configuration",       ":tabnew ~/.config/nvim/<CR>"          ),
 	dashboard.button("n", "  Random title",        ":AlphaRandomTitle<CR>:AlphaRedraw<CR>"),
-	dashboard.button("q", "  Quit Neovim",         ":qa<CR>"                            ),
+	dashboard.button("g", "  Neogit",              ":Neogit<CR>"                              ),
+	dashboard.button("q", "  Quit Neovim",         ":qa<CR>"                              ),
 }
 
 local function footer()
