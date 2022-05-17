@@ -19,8 +19,8 @@ local beautiful     = require("beautiful")
 local naughty       = require("naughty")
 local lain          = require("lain")
 -- local screen        = require("screen")
---local menubar       = require("menubar")
--- local freedesktop   = require("freedesktop")
+-- local menubar       = require("menubar")
+local freedesktop   = require("freedesktop")
 local hotkeys_popup = require("awful.hotkeys_popup")
                       require("awful.hotkeys_popup.keys")
 local mytable       = awful.util.table or gears.table -- 4.{0,1} compatibility
@@ -195,16 +195,16 @@ local myawesomemenu = {
    { "Quit", function() awesome.quit() end },
 }
 
--- awful.util.mymainmenu = freedesktop.menu.build {
---     before = {
---         { "Awesome", myawesomemenu, beautiful.awesome_icon },
---         -- other triads can be put here
---     },
---     after = {
---         { "Open terminal", terminal },
---         -- other triads can be put here
---     }
--- }
+awful.util.mymainmenu = freedesktop.menu.build {
+    before = {
+        { "Awesome", myawesomemenu, beautiful.awesome_icon },
+        -- other triads can be put here
+    },
+    after = {
+        { "Open terminal", terminal },
+        -- other triads can be put here
+    }
+}
 
 -- }}}
 
