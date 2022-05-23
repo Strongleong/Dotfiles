@@ -5,3 +5,5 @@ export XDG_DATA_HOME=$HOME/.local/share
 
 # zsh config dir
 export ZDOTDIR=$HOME/.config/zsh
+
+export PATH="$HOME/.local/bin":$PATH

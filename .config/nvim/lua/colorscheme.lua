@@ -7,7 +7,7 @@ end
 onenord.setup({
   theme = nil, -- "dark" or "light". Alternatively, remove the option and set vim.o.background instead
   borders = true, -- Split window borders
-  fade_nc = true, -- Fade non-current windows, making them more distinguishable
+  fade_nc = false, -- Fade non-current windows, making them more distinguishable
   styles = {
     comments = "NONE", -- Style that is applied to comments: see `highlight-args` for options
     strings = "NONE", -- Style that is applied to strings: see `highlight-args` for options
@@ -17,7 +17,7 @@ onenord.setup({
     diagnostics = "underline", -- Style that is applied to diagnostics: see `highlight-args` for options
   },
   disable = {
-    background = true, -- Disable setting the background color
+    background = false, -- Disable setting the background color
     cursorline = false, -- Disable the cursorline
     eob_lines = true, -- Hide the end-of-buffer lines
   },

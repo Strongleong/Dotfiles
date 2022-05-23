@@ -12,10 +12,8 @@ end
 
 require("luasnip/loaders/from_vscode").lazy_load()
 
-
 local function leave_snippet()
-    if
-        ((vim.v.event.old_mode == 's' and vim.v.event.new_mode == 'n') or vim.v.event.old_mode == 'i')
+    if ((vim.v.event.old_mode == 's' and vim.v.event.new_mode == 'n') or vim.v.event.old_mode == 'i')
         and require('luasnip').session.current_nodes[vim.api.nvim_get_current_buf()]
         and not require('luasnip').session.jump_active
     then
@@ -24,42 +22,37 @@ local function leave_snippet()
 end
 
 vim.api.nvim_create_autocmd('ModeChanged', {
-  pattern  = '*',
-  callback = leave_snippet,
-  desc     = 'Stop snippets when you leave to normal mode'
+    pattern  = '*',
+    callback = leave_snippet,
+    desc     = 'Stop snippets when you leave to normal mode'
 })
 
-local check_backspace = function()
-    local col = vim.fn.col "." - 1
-    return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
-end
-
 local kind_icons = {
-    Text = "",
-    Method = "m",
+    Text = "",
+    Method = "",
     Function = "",
-    Constructor = "",
-    Field = "",
-    Variable = "",
-    Class = "",
+    Constructor = "",
+    Field = "",
+    Variable = "",
+    Class = "ﴯ",
     Interface = "",
     Module = "",
-    Property = "",
+    Property = "ﰠ",
     Unit = "",
     Value = "",
     Enum = "",
     Keyword = "",
-    Snippet = "",
+    Snippet = "",
     Color = "",
     File = "",
     Reference = "",
     Folder = "",
     EnumMember = "",
-    Constant = "",
+    Constant = "",
     Struct = "",
     Event = "",
     Operator = "",
-    TypeParameter = "",
+    TypeParameter = ""
 }
 
 cmp.setup({
@@ -68,9 +61,12 @@ cmp.setup({
             luasnip.lsp_expand(args.body)
         end
     },
+    view = {
+        entries = { name = 'custom', selection_order = 'near_cursor' }
+    },
     window = {
-        completion    = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered()
+        -- completion    = cmp.config.window.bordered(),
+        -- documentation = cmp.config.window.bordered()
     },
     mapping = cmp.mapping.preset.insert({
         ['<C-b>']     = cmp.mapping.scroll_docs(-4),
@@ -85,12 +81,10 @@ cmp.setup({
                 luasnip.expand()
             elseif luasnip.expand_or_jumpable() then
                 luasnip.expand_or_jump()
-            elseif check_backspace() then
-                fallback()
             else
                 fallback()
             end
-        end, { "i", "s", }),
+        end, { "i", "s", "c" }),
         ["<S-Tab>"]   = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
@@ -99,7 +93,7 @@ cmp.setup({
             else
                 fallback()
             end
-        end, { "i", "s", }),
+        end, { "i", "s", "c" }),
     }),
     formatting = {
         fields = { "kind", "abbr", "menu" },
@@ -118,12 +112,13 @@ cmp.setup({
         end,
     },
     sources = cmp.config.sources({
+        { name = "path" },
+        { name = "nvim_lua" },
+        { name = "dap" },
         { name = "nvim_lsp" },
         { name = "luasnip" },
         { name = "buffer" },
-        { name = "path" },
         { name = "emoji" },
-        { name = "nvim_lua" },
     }),
     confirm_opts = {
         behavior = cmp.ConfirmBehavior.Replace,
@@ -136,13 +131,20 @@ cmp.setup({
 })
 
 cmp.setup.cmdline(':', {
-  sources = {
-    { name = 'cmdline' }
-  }
+    sources = {
+        { name = "path" },
+        { name = 'cmdline' }
+    }
 })
 
 cmp.setup.cmdline('/', {
-  sources = {
-    { name = 'buffer' }
-  }
+    sources = {
+        { name = 'buffer' }
+    },
+    -- view = {
+    --     entries = {
+    --         name = 'wildmenu',
+    --         separator = '|'
+    --     }
+    -- },
 })

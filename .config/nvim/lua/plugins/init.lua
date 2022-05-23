@@ -14,7 +14,6 @@ end
 local plugins = handle:read('*a')
 handle:close()
 
-
 for plugin in string.gmatch(plugins,'[^\r\n]+') do
   local ok, error = pcall(require, plugin)
   if not ok then
@@ -25,4 +24,9 @@ end
 local ok, _ = pcall(require, 'plugins.settings.lsp')
 if not ok then
   vim.notify('Error. Can\'t load LSP settings')
+end
+
+ok, _ = pcall(require, 'plugins.settings.dap')
+if not ok then
+  vim.notify('Error. Can\'t load DAP settings')
 end

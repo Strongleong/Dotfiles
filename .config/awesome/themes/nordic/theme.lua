@@ -19,25 +19,25 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 -- Nord color scheme colors:
 -- Polar Night:
-nord0  = "#2E3440"
-nord1  = "#3B4252"
-nord2  = "#434C5E"
-nord3  = "#4C566A"
+local nord0  = "#2E3440"
+local nord1  = "#3B4252"
+local nord2  = "#434C5E"
+local nord3  = "#4C566A"
 -- Snow Storm:
-nord4  = "#D8DEE9"
-nord5  = "#E5E9F0"
-nord6  = "#ECEFF4"
+local nord4  = "#D8DEE9"
+local nord5  = "#E5E9F0"
+local nord6  = "#ECEFF4"
 -- Frost
-nord7  = "#8FBCBB"
-nord8  = "#88C0D0"
-nord9  = "#81A1C1"
-nord10 = "#5E81AC"
+local nord7  = "#8FBCBB"
+local nord8  = "#88C0D0"
+local nord9  = "#81A1C1"
+local nord10 = "#5E81AC"
 -- Aurora
-nord11 = "#BF616A"
-nord12 = "#D08770"
-nord13 = "#EBCB8B"
-nord14 = "#A3BE8C"
-nord15 = "#B48EAD"
+local nord11 = "#BF616A"
+local nord12 = "#D08770"
+local nord13 = "#EBCB8B"
+local nord14 = "#A3BE8C"
+local nord15 = "#B48EAD"
 
 local function setWallpaper()
     awful.spawn.with_shell("feh --randomize --bg-fill /usr/share/backgrounds/*")
@@ -245,6 +245,7 @@ function theme.at_screen_connect(s)
             wibox.container.background(temp.widget, nord10),
             wibox.container.background(baticon, nord9),
             wibox.container.background(bat.widget, nord9),
+            wibox.container.background(clockicon, nord8),
             wibox.container.background(clock, nord8),
             wibox.widget.systray()
         },

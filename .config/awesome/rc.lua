@@ -70,7 +70,7 @@ end
 
 run_once({
     "unclutter -root",
-    "picom -f -D 2 --experimental-backends --backend glx --vsync --blur-background --blur-method=dual_kawase",
+    -- "picom -D 2 -i 0.90 --experimental-backends --backend glx --vsync --blur-background --blur-method=dual_kawase -b",
     "volumeicon",
     "flameshot",
     "nm-applet"

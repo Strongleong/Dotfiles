@@ -55,5 +55,6 @@ neogit.setup({
 	},
 	-- override/add mappings
 	mappings = {
+		["B"] = "BranchPopup",
 	},
 })

@@ -36,6 +36,14 @@ return packer.startup(function(use)
   use 'lyokha/vim-xkbswitch'
   use 'goolord/alpha-nvim'
   use 'BlakeJC94/alpha-nvim-fortune'
+  use {
+    "iamcco/markdown-preview.nvim",
+    run = "cd app && npm install",
+    setup = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
+  }
 
   use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/plenary.nvim' } } }
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
@@ -48,6 +56,9 @@ return packer.startup(function(use)
 
   use 'preservim/tagbar'
   use 'fedepujol/move.nvim'
+
+  use 'norcalli/nvim-colorizer.lua'
+  use 'ten3roberts/qf.nvim'
 
   -- Colorchemes
   use 'rmehri01/onenord.nvim'
@@ -79,12 +90,18 @@ return packer.startup(function(use)
   use 'sindrets/diffview.nvim'
   use 'lewis6991/gitsigns.nvim'
 
-  use 'janko-m/vim-test' -- Unit tests
-  use 'puremourning/vimspector' -- Debuging
+  -- Testing
+  use 'janko-m/vim-test'
 
-  use 'norcalli/nvim-colorizer.lua'
+  -- Debuging
+  use 'mfussenegger/nvim-dap'
+  use 'rcarriga/nvim-dap-ui'
+  use 'rcarriga/cmp-dap'
+  use 'ibhagwan/fzf-lua'
+  use 'nvim-telescope/telescope-dap.nvim'
+  use 'theHamsta/nvim-dap-virtual-text'
+  use 'Pocco81/dap-buddy.nvim'
 
-  use 'wfxr/minimap.vim'
 
   if PACKER_BOOTSTRAP then
     require('packer').sync()

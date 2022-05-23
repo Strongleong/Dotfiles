@@ -1,10 +1,14 @@
-local status_ok, alpha = pcall(require, "alpha")
+local status_ok
+local alpha
+local fortune
+
+status_ok, alpha = pcall(require, "alpha")
 if not status_ok then
 	vim.notify('Error. Alpha is not installed')
 	return
 end
 
-local status_ok, fortune = pcall(require, "alpha.fortune")
+status_ok, fortune = pcall(require, "alpha.fortune")
 if not status_ok then
 	vim.notify('Error. Fortune is not installed')
 	return
@@ -31,10 +35,6 @@ dashboard.section.buttons.val = {
 	dashboard.button("g", "  Neogit",              ":Neogit<CR>"                              ),
 	dashboard.button("q", "  Quit Neovim",         ":qa<CR>"                              ),
 }
-
-local function footer()
-	return "Кто прочетал то лалка азазаз))00)))0"
-end
 
 -- dashboard.section.footer.val = footer()
 dashboard.section.footer.val = fortune()
