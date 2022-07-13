@@ -1,1 +1,98 @@
+set trash
+set vimhelp
+set fastrun
+set syscalls
+set wildmenu
+set norunexec
+set smartcase
+set incsearch
+set ignorecase
+set nohlsearch
+set sortnumbers
+set nofollowlinks
+
+set vicmd=nvim
+set scrolloff=4
+set history=100
+set undolevels=100
+
+if !has('win')
+    set slowfs=curlftpfs
+endif
+
 colorscheme nord
+
+mark h ~/
+
+set timefmt=%m/%d\ %H:%M
+set statusline="  %t%= %A %10u:%-7g %15E %20d  "
+
+nnoremap J 5j
+nnoremap K 5k
+
+nnoremap <C-h> 5<
+nnoremap <C-l> 5>
+
+nnoremap <C-o> :view<CR>
+
+
+command! dragon dragon-drop -a -x %f
+command! dragons dragon-drop -a %f
+command! dragin dragon-drop -t -x %f
+command! dragins dragon-drop -t %f
+command! df df -h %m 2> /dev/null
+command! diff nvim -d %f %F
+command! zip zip -r %f.zip %f
+command! run !! ./%f
+command! make !!make %a
+command! mkcd :mkdir %a | cd %a
+command! vgrep nvim "+grep %a"
+command! reload :write | restart
+
+nmap <Space>dr :dragon<CR>
+nmap <Space>ds :dragons<CR>
+nmap <Space>di :dragin<CR>
+nmap <Space>dd :dragins<CR>
+
+vmap <Space>dr :dragon<CR>
+vmap <Space>ds :dragons<CR>
+vmap <Space>di :dragin<CR>
+vmap <Space>dd :dragins<CR>
+
+nnoremap w :view<cr>
+vnoremap w :view<cr>gv
+
+fileviewer *.pdf
+  \ vifmimg pdf %px %py %pw %ph %c
+  \ %pc
+  \ vifmimg clear
+
+fileviewer *.djvu
+  \ vifmimg djvu %px %py %pw %ph %c
+  \ %pc
+  \ vifmimg clear
+
+fileviewer *.epub
+  \ vifmimg epub %px %py %pw %ph %c
+  \ %pc
+  \ vifmimg clear
+
+fileviewer <video/*>
+  \ vifmimg video %px %py %pw %ph %c
+  \ %pc
+  \ vifmimg clear
+
+fileviewer <image/*>
+  \ vifmimg draw %px %py %pw %ph %c
+  \ %pc
+  \ vifmimg clear
+
+fileviewer <audio/*>
+  \ vifmimg audio %px %py %pw %ph %c
+  \ %pc
+  \ vifmimg clear
+
+fileviewer <font/*>
+  \ vifmimg font %px %py %pw %ph %c
+  \ %pc
+  \ vifmimg clear
