@@ -70,11 +70,11 @@ end
 
 run_once({
     "unclutter -root",
-    -- "picom -D 2 -i 0.90 --experimental-backends --backend glx --vsync --blur-background --blur-method=dual_kawase -b",
     "volumeicon",
     "flameshot",
     "nm-applet"
-}) -- comma-separated entries
+    -- "picom -D 2 -i 0.90 --experimental-backends --backend glx --vsync --blur-background --blur-method=dual_kawase -b",
+}) -- cmoma-separated entries
 
 -- This function implements the XDG autostart specification
 --[[
@@ -408,9 +408,9 @@ globalkeys = mytable.join(
     end, {description = "restore minimized", group = "client"}),
 
     -- Screen brightness
-    awful.key({ }, "XF86MonBrightnessUp", function () os.execute("xbacklight -inc 10") end,
+    awful.key({ }, "XF86MonBrightnessUp", function () os.execute("light -A 10") end,
               {description = "+10%", group = "hotkeys"}),
-    awful.key({ }, "XF86MonBrightnessDown", function () os.execute("xbacklight -dec 10") end,
+    awful.key({ }, "XF86MonBrightnessDown", function () os.execute("light -U 10") end,
               {description = "-10%", group = "hotkeys"}),
 
     -- Change wallpaper
@@ -419,16 +419,16 @@ globalkeys = mytable.join(
               {description = "Change wallpaper", group = "hotkeys"}),
 
     -- ALSA volume control
-    awful.key({ }, "XF86AudioRaiseVolume",
-        function ()
-            os.execute("amixer -q set Master 1+")
-        end,
-        {description = "volume up", group = "hotkeys"}),
-    awful.key({ }, "XF86AudioLowerVolume",
-        function ()
-            os.execute("amixer -q set Master 1-")
-        end,
-        {description = "volume down", group = "hotkeys"}),
+    -- awful.key({ }, "XF86AudioRaiseVolume",
+    --     function ()
+    --         os.execute("amixer -q set Master 1+")
+    --     end,
+    --     {description = "volume up", group = "hotkeys"}),
+    -- awful.key({ }, "XF86AudioLowerVolume",
+    --     function ()
+    --         os.execute("amixer -q set Master 1-")
+    --     end,
+    --     {description = "volume down", group = "hotkeys"}),
     awful.key({ altkey }, "m",
         function ()
             os.execute("amixer -q set Master toggle")
@@ -469,7 +469,7 @@ globalkeys = mytable.join(
     --]]
     -- dmenu
     awful.key({ modkey, "Shift" }, "Return", function ()
-            os.execute(string.format("dmenu_run -i -fn 'Monospace' -nb '%s' -nf '%s' -sb '%s' -sf '%s'",
+            os.execute(string.format("dmenu_run -i -fn 'RobotoMono Nerd Fonts' -nb '%s' -nf '%s' -sb '%s' -sf '%s'",
             beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus))
         end,
         {description = "show dmenu", group = "launcher"}),

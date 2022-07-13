@@ -46,8 +46,8 @@ end
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/nordic/"
 theme.wallpaper                                 = setWallpaper()
-theme.font                                      = "CodeNewRoman Nerd Font 11"
-theme.taglist_font                              = "FontAwesome 11"
+theme.font                                      = "RobotoMono Nerd Font 12"
+theme.taglist_font                              = "FontAwesome 15"
 theme.fg_normal                                 = nord5
 theme.fg_focus                                  = nord4
 theme.fg_urgent                                 = nord6
