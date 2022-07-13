@@ -5,7 +5,7 @@ alias g='lazygit'
 alias zsh-update-plugins="find "$ZDOTDIR/plugins" -type d -exec test -e '{}/.git' ';' -print0 | xargs -I {} -0 git -C {} pull -q"
 alias nvimrc='nvim ~/.config/nvim/'
 alias ll='ls -lh'
-alias lla='ls -lha'
+alias la='ls -lha'
 
 # Colorize grep output (good for log files)
 alias grep='grep --color=auto'
