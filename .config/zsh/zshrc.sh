@@ -53,9 +53,8 @@ zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
 zsh_add_plugin "hlissner/zsh-autopair"
 zsh_add_plugin "hcgraf/zsh-sudo"
 zsh_add_plugin "casonadams/alacritty-shell"
-zsh_add_plugin "keithhamilton/oh-my-dogesh"
+# zsh_add_plugin "keithhamilton/oh-my-dogesh"
 zsh_add_plugin "mbenford/zsh-tmux-auto-title"
-zsh_add_plugin "jsahlen/tmux-vim-integration.plugin.zsh"
 zsh_add_plugin "jsahlen/tmux-vim-integration.plugin.zsh"
 
 compinit -u
