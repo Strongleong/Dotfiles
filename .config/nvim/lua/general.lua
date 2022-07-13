@@ -3,10 +3,10 @@ vim.cmd('filetype plugin indent on')
 
 local path        = vim.opt.path + '**'
 local clipboard   = 'unnamedplus'
-local font        = 'monospace:h17'
 local completeopt = {'menuone', 'noselect'}
 local foldexpr    = 'nvim_treesitter#foldexpr()'
 local undodir     = os.getenv('HOME') .. '/.nvim/undo'
+local font        = 'RobotoMono Nerd Font:h11'
 
 vim.opt.hidden         = true          -- Allow files to remain open without saving
 vim.opt.number         = true          -- Line numbers

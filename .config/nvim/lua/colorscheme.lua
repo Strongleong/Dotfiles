@@ -4,6 +4,8 @@ if not status_ok then
   return
 end
 
+local colors = require("onenord.colors").load()
+
 onenord.setup({
   theme = nil, -- "dark" or "light". Alternatively, remove the option and set vim.o.background instead
   borders = true, -- Split window borders
@@ -21,6 +23,9 @@ onenord.setup({
     cursorline = false, -- Disable the cursorline
     eob_lines = true, -- Hide the end-of-buffer lines
   },
-  custom_highlights = {}, -- Overwrite default highlight groups
+  custom_highlights = {
+    NvimTreeOpenedFolderName = { bg = colors.active, fg = '#FFF' }
+  }, -- Overwrite default highlight groups
   custom_colors = {}, -- Overwrite default colors
 })
+

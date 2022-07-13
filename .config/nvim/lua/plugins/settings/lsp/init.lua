@@ -56,7 +56,6 @@ local servers = installer.get_installed_servers()
 for _, server in pairs(servers) do
   local ok, settings = pcall(require, "plugins.settings.lsp." .. server.name)
   if not ok then
-    -- vim.notify('Error. Can\'t load ' .. server.name .. ' LSP settings')
     settings = {}
   end
 

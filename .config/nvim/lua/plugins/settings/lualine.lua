@@ -30,7 +30,17 @@ lualine.setup({
 	sections = {
 		lualine_a = { "mode" },
 		lualine_b = { kb_layout, "branch", "diff" },
-		lualine_c = { "buffers" },
+		lualine_c = {
+			{
+				"buffers",
+				symbols = {
+					modified = ' ●',
+					alternate_file = '',
+					directory =  '',
+				},
+			},
+
+		},
 		lualine_x = { "encoding", "fileformat", "filetype" },
 		lualine_y = { "progress" },
 		lualine_z = { "location", "diagnostics" },

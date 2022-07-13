@@ -1,11 +1,11 @@
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+-- local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = {'*.js', '*.ts', '*.vue'},
-	group = augroup,
-	command = "EslintFixAll",
-	desc = "Fix linter errors on save"
-})
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+-- 	pattern = {'*.js', '*.ts', '*.vue'},
+-- 	group = augroup,
+-- 	command = "EslintFixAll",
+-- 	desc = "Fix linter errors on save"
+-- })
 
 return {
   codeAction = {
@@ -24,7 +24,7 @@ return {
   format = true,
   nodePath = "",
   onIgnoredFiles = "off",
-  packageManager = "npm",
+  packageManager = "yarn",
   quiet = false,
   rulesCustomizations = {},
   run = "onType",

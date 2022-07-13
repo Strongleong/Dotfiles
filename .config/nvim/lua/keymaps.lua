@@ -27,6 +27,21 @@ local function map(mode, keys, command, description, additional)
   end
 end
 
+local function adjust_font_size(amount)
+  local font_full = vim.api.nvim_get_option('guifont')
+  local font, size = string.match(font_full, "(.*):h(.*)")
+  size = size + amount
+  vim.opt.guifont = font .. ":h" .. size
+end
+
+local function increment_font_size()
+  adjust_font_size(1)
+end
+
+local function decrement_font_size()
+  adjust_font_size(-1)
+end
+
 --    Mode  Keys            Command                                                                 Desc
 map(  'n', '<Tab>',        ':bnext<CR>',                                                            '[Buffer] Next buffer')
 map(  'n', '<S-Tab>',      ':bprevious<CR>',                                                        '[Buffer] Previous buffer')
@@ -40,6 +55,11 @@ map(  'n', '<C-Down>',     ':resize -3<CR>',                                    
 
 map(  'v', '>',            '>gv',                                                                   '[Indent] Indent in visual mode vithout leaving to normal mode')
 map(  'v', '<',            '<gv',                                                                   '[Indent] Unindent in visual mode vithout leaving to normal mode')
+
+map(  'n', '-',            decrement_font_size,                                                    '[GUI] Increase font size')
+map(  'n', '+',            increment_font_size,                                                     '[GUI] Decrease font size')
+map(  'i', '<C-->',        decrement_font_size,                                                    '[GUI] Increase font size')
+map(  'i', '<C-+>',        increment_font_size,                                                     '[GUI] Decrease font size')
 
 local status_ok, tmux = pcall(require, "nvim-tmux-navigation")
 if status_ok then
@@ -145,11 +165,22 @@ else
   vim.notify('Error. DAP not found')
 end
 
+-- Hop.nvim
+map('n', 'f',         "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>",                         '[HOP] Jump to symbol')
+map('n', 'F',         "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>",                        '[HOP] Jump back to symbol')
+map('o', 'f',         "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, inclusive_jump = true })<cr>",  '[HOP] Jump to symbol inclusive')
+map('o', 'F',         "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, inclusive_jump = true })<cr>", '[HOP] Jump back to symbol inclusive')
+map('', 't',          "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>",                         '[HOP] Jump before symbol')
+map('', 'T',          "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>",                        '[HOP] Jump back before symbol')
+map('n', '<leader>e', "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END })<cr>",                                                        '[HOP] Jump to word')
+map('v', '<leader>e', "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END })<cr>",                                                        '[HOP] Jump to word')
+map('o', '<leader>e', "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END, inclusive_jump = true })<cr>",                                 '[HOP] Jump to word inclusive')
+
 -- Hard mode :D
-map({'n', 'v'}, '<Up>',    '[Hard mode :D] <Nop>')
-map({'n', 'v'}, '<Down>',  '[Hard mode :D] <Nop>')
-map({'n', 'v'}, '<Left>',  '[Hard mode :D] <Nop>')
-map({'n', 'v'}, '<Right>', '[Hard mode :D] <Nop>')
+map({'n', 'v'}, '<Up>',    '<Nop>', '[Hard mode :D] Disable UP key')
+map({'n', 'v'}, '<Down>',  '<Nop>', '[Hard mode :D] Disable DOWN key')
+map({'n', 'v'}, '<Left>',  '<Nop>', '[Hard mode :D] Disable LEFT key')
+map({'n', 'v'}, '<Right>', '<Nop>', '[Hard mode :D] Disable RIGHT key')
 
 -- CP command
 vim.cmd([[

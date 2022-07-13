@@ -15,8 +15,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 
 local status_ok, packer = pcall(require, 'packer')
 if not status_ok then
-  vim.notify('Error. Packer is not found')
-  return
+  vim.notify('Installing Packer')
 end
 
 return packer.startup(function(use)
@@ -31,19 +30,11 @@ return packer.startup(function(use)
   use 'tpope/vim-repeat'
   use 'tpope/vim-commentary'
   use 'tpope/vim-surround'
-  use 'karb94/neoscroll.nvim'
   use 'alexghergh/nvim-tmux-navigation'
   use 'lyokha/vim-xkbswitch'
   use 'goolord/alpha-nvim'
   use 'BlakeJC94/alpha-nvim-fortune'
-  use {
-    "iamcco/markdown-preview.nvim",
-    run = "cd app && npm install",
-    setup = function()
-      vim.g.mkdp_filetypes = { "markdown" }
-    end,
-    ft = { "markdown" },
-  }
+  use { 'phaazon/hop.nvim', branch = 'v1' }
 
   use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/plenary.nvim' } } }
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
@@ -53,6 +44,8 @@ return packer.startup(function(use)
 
   use 'kyazdani42/nvim-tree.lua'
   use 'kyazdani42/nvim-web-devicons'
+
+  use 'vifm/vifm.vim'
 
   use 'preservim/tagbar'
   use 'fedepujol/move.nvim'
@@ -87,6 +80,7 @@ return packer.startup(function(use)
   use 'rafamadriz/friendly-snippets'
 
   use 'TimUntersberger/neogit'
+  use 'tpope/vim-fugitive'
   use 'sindrets/diffview.nvim'
   use 'lewis6991/gitsigns.nvim'
 
@@ -107,3 +101,4 @@ return packer.startup(function(use)
     require('packer').sync()
   end
 end)
+

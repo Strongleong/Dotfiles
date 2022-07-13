@@ -83,6 +83,12 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 vim.api.nvim_create_autocmd('FileType', {
+  pattern = {'pov'},
+  command = 'set filetype=phtml',
+  desc    = 'Inc files are hptml'
+})
+
+vim.api.nvim_create_autocmd('FileType', {
   pattern = {'coffee', 'groovy', 'elm', 'dockerfile'},
   command = 'setl textwidth=100 softtabstop=2 shiftwidth=2 tabstop=2 colorcolumn=100',
   desc    = 'CoffeeScript, Groovy, Elm, Docker'
