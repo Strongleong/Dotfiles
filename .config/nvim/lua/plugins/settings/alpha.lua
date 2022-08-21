@@ -17,10 +17,10 @@ local dashboard = require("alpha.themes.dashboard")
 
 vim.cmd([[:command! -nargs=0 AlphaRandomTitle lua RandomTitle()]])
 function RandomTitle()
-	local header = require"custom.alpha_headers".get_random(dashboard.section.header.val)
-	dashboard.section.header.val = header.header
-	dashboard.section.header.opts.hl  = header.colorscheme
-	dashboard.section.footer.val = fortune()
+	local header                     = require "custom.alpha_headers".get_random(dashboard.section.header.val)
+	dashboard.section.header.val     = header.header
+	dashboard.section.header.opts.hl = header.colorscheme
+	dashboard.section.footer.val     = fortune()
 end
 
 RandomTitle()
@@ -32,16 +32,16 @@ dashboard.section.buttons.val = {
 	dashboard.button("t", "  Find text",           ":Telescope live_grep <CR>"            ),
 	dashboard.button("c", "  Configuration",       ":tabnew ~/.config/nvim/<CR>"          ),
 	dashboard.button("n", "  Random title",        ":AlphaRandomTitle<CR>:AlphaRedraw<CR>"),
-	dashboard.button("g", "  Neogit",              ":Neogit<CR>"                              ),
+	dashboard.button("g", "  Neogit",              ":Neogit<CR>"                          ),
 	dashboard.button("q", "  Quit Neovim",         ":qa<CR>"                              ),
 }
 
 -- dashboard.section.footer.val = footer()
 dashboard.section.footer.val = fortune()
 
-dashboard.section.buttons.opts.hl = "Constant"
+dashboard.section.buttons.opts.hl          = "Constant"
 dashboard.section.buttons.opts.hl_shortcut = "Constant"
-dashboard.section.footer.opts.hl  = "Comment"
+dashboard.section.footer.opts.hl           = "Comment"
 
 dashboard.opts.opts.noautocmd = true
 alpha.setup(dashboard.opts)
