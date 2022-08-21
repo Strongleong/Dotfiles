@@ -1,32 +1,19 @@
 require('plugins.install')
 
-local cmd = "fd .lua /home/$USER/.config/nvim/lua/plugins/settings --color=never -e lua -d 1"
-cmd = cmd .. " | sed -r 's/^.*\\/lua\\///' "
-cmd = cmd .. " | sed 's/\\.lua//' "
-cmd = cmd .. " | sed 's/\\//./g'"
-
-local handle = io.popen(cmd)
-if handle == nil then
-  vim.notify('Error. Can\'t load plugins settings')
-  return ''
-end
-
-local plugins = handle:read('*a')
-handle:close()
-
-for plugin in string.gmatch(plugins,'[^\r\n]+') do
-  local ok, error = pcall(require, plugin)
+local debbugersPath = vim.fn.stdpath('config') .. '/lua/plugins/settings'
+for _, file in ipairs(vim.fn.readdir(debbugersPath, [[v:val =~ '\.lua$']])) do
+  local ok, error = pcall(require, 'plugins.settings.' .. file:gsub('%.lua$', ''))
   if not ok then
-    vim.notify(error)
+    vim.notify('Error. could not load file ' .. debbugersPath .. file .. ': ' .. error)
   end
 end
 
-local ok, _ = pcall(require, 'plugins.settings.lsp')
+local ok, error = pcall(require, 'plugins.settings.lsp')
 if not ok then
-  vim.notify('Error. Can\'t load LSP settings')
+  vim.notify('Error. Can\'t load LSP settings: ' .. error)
 end
 
-ok, _ = pcall(require, 'plugins.settings.dap')
+ok, error = pcall(require, 'plugins.settings.dap.init')
 if not ok then
-  vim.notify('Error. Can\'t load DAP settings')
+  vim.notify('Error. Can\'t load DAP settings: ' .. error)
 end
