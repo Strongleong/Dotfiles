@@ -26,6 +26,19 @@ def autostart():
     subprocess.run([script])
 
 
+@lazy.function
+def spawn_float_term(qtile, *argv):
+    # `qtilerun` is basically a script with the command `qtile run-cmd $@ &`.
+    # `terminal` is a path to an actual terminal.
+    command = ['qtile', 'run-cmd', '--float', terminal, '--hold', '-e']
+    for argument in argv:
+        if isinstance(argument, list):
+            command.extend(argument)
+        else:
+            command.append(argument)
+    return subprocess.Popen(command)
+
+
 keys = [
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
@@ -36,10 +49,10 @@ keys = [
     Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
-    Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
-    Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
-    Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
-    Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
+    Key([mod, alt], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
+    Key([mod, alt], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
+    Key([mod, alt], "j", lazy.layout.grow_down(), desc="Grow window down"),
+    Key([mod, alt], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
     Key([mod, "control"], "space", lazy.window.toggle_floating(), desc="Toggle floating"),
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen"),
@@ -123,7 +136,7 @@ layouts = [
     layout.Max(**config),
     layout.Stack(**config),
     layout.Bsp(**config),
-    layout.Matrix(**config),
+    layout.Matrix(),
     layout.MonadTall(**config),
     layout.MonadWide(**config),
     layout.RatioTile(**config),
@@ -235,130 +248,17 @@ def init_widgets_list(monitor):
             fontsize=12,
             foreground=colors[6]
         ),
-        widget.WindowName(
+        widget.WindowTabs(
             background=colors[1],
             foreground=colors[6],
             font='RobotoMono',
             fontsize=12,
             max_chars=60
         ),
+        # widget.Spacer(),
     ]
 
     widget_list_mid = [
-        widget.Spacer(),
-        widget.Sep(
-            background=colors[1],
-            foreground=colors[5],
-            linewidth=1,
-            padding=10
-        ),
-        widget.TextBox(
-            background=colors[1],
-            font='RobotoMono Nerd Font',
-            fontsize=14,
-            foreground=colors[6],
-            padding=0,
-            text=' '
-        ),
-        widget.ThermalSensor(
-            background=colors[1],
-            font='RobotoMono',
-            fontsize=12,
-            foreground=colors[6],
-            update_interval=0.2
-        ),
-        widget.Sep(
-            background=colors[1],
-            foreground=colors[5],
-            linewidth=1,
-            padding=10
-        ),
-        widget.TextBox(
-            background=colors[1],
-            font='RobotoMono Nerd Font',
-            fontsize=14,
-            foreground=colors[6],
-            padding=0,
-            text=' '
-        ),
-        widget.Memory(
-            background=colors[1],
-            font='RobotoMono',
-            fontsize=12,
-            foreground=colors[6],
-            format="{MemUsed: .0f}{mm}",
-            update_interval=1.0
-        ),
-        widget.Sep(
-            background=colors[1],
-            foreground=colors[5],
-            linewidth=1,
-            padding=10
-        ),
-        widget.TextBox(
-            background=colors[1],
-            font='RobotoMono Nerd Font',
-            fontsize=14,
-            foreground=colors[6],
-            padding=0,
-            text=' '
-        ),
-        widget.CPU(
-            background=colors[1],
-            font='RobotoMono',
-            fontsize=12,
-            foreground=colors[6],
-            format='CPU {load_percent}%',
-            update_interval=1
-        ),
-        widget.Sep(
-            background=colors[1],
-            foreground=colors[5],
-            linewidth=1,
-            padding=10
-        ),
-        widget.TextBox(
-            background=colors[1],
-            font='RobotoMono Nerd Font',
-            fontsize=14,
-            foreground=colors[6],
-            padding=0,
-            text='  '
-        ),
-        widget.Net(
-            background=colors[1],
-            font='RobotoMono',
-            fontsize=12,
-            foreground=colors[5],
-            format='{interface}: {down} ↓ ',
-            interface='all',
-            padding=0
-        ),
-        widget.Sep(
-            background=colors[1],
-            foreground=colors[5],
-            linewidth=1,
-            padding=10
-        ),
-        widget.Battery(
-            background=colors[1],
-            charge_char='',
-            discharge_char='',
-            empty_char='',
-            unknown_char='',
-            font='RobotoMono',
-            format='{char}  {percent:2.0%}',
-            fontsize=12,
-            foreground=colors[5],
-            padding=0
-        ),
-        widget.Sep(
-            background=colors[1],
-            foreground=colors[5],
-            linewidth=1,
-            padding=10
-        ),
-        widget.Spacer(),
     ]
 
     widget_list_right = [
@@ -452,15 +352,178 @@ def init_widgets_list(monitor):
                 linewidth=1,
                 padding=10,
                 no_update_string='No updates',
-                font='RobotoMono'
+                font='RobotoMono',
+                distro='Arch',
+                custom_command='checkupdates; yay -Qua',
+                mouse_callbacks={
+                    'Button1': spawn_float_term(['yay', '-S', 'u', 'y', '--noconfirm'])
+                },
             ),
         ]
 
     return widget_list_left + widget_list_mid + widget_list_unique + widget_list_right
 
 
+def init_bottom_widgets_list():
+    return [
+        widget.Spacer(),
+        widget.Sep(
+            background=colors[1],
+            foreground=colors[5],
+            linewidth=1,
+            padding=10
+        ),
+        widget.TextBox(
+            background=colors[1],
+            font='RobotoMono Nerd Font',
+            fontsize=14,
+            foreground=colors[6],
+            padding=0,
+            text=' '
+        ),
+        widget.ThermalSensor(
+            background=colors[1],
+            font='RobotoMono',
+            fontsize=12,
+            foreground=colors[6],
+            tag_sensor='Package id 0',
+            update_interval=0.2
+        ),
+        widget.Sep(
+            background=colors[1],
+            foreground=colors[5],
+            linewidth=1,
+            padding=10
+        ),
+        widget.TextBox(
+            background=colors[1],
+            font='RobotoMono Nerd Font',
+            fontsize=14,
+            mouse_callbacks={
+                'Button1': lambda: qtile.cmd_spawn('alacritty -e htop -s PERCENT_MEM')
+            },
+            foreground=colors[6],
+            padding=0,
+            text=' '
+        ),
+        widget.Memory(
+            background=colors[1],
+            font='RobotoMono',
+            mouse_callbacks={
+                'Button1': lambda: qtile.cmd_spawn('alacritty -e htop -s PERCENT_MEM')
+            },
+            fontsize=12,
+            format='{MemUsed: .2f}{mm}/{MemTotal: .2f}{mm}',
+            foreground=colors[6],
+            measure_mem='G'
+        ),
+        widget.MemoryGraph(
+            type='line',
+            line_width=1,
+            graph_color=colors[8],
+            mouse_callbacks={
+                'Button1': lambda: qtile.cmd_spawn('alacritty -e htop -s PERCENT_MEM')
+            },
+            border_width=0,
+            samples=1000
+        ),
+        widget.Sep(
+            background=colors[1],
+            foreground=colors[5],
+            linewidth=1,
+            padding=10
+        ),
+        widget.TextBox(
+            background=colors[1],
+            font='RobotoMono Nerd Font',
+            fontsize=14,
+            mouse_callbacks={
+                'Button1': lambda: qtile.cmd_spawn('alacritty -e htop -s PERCENT_CPU')
+            },
+            foreground=colors[6],
+            padding=0,
+            text=' '
+        ),
+        widget.CPU(
+            background=colors[1],
+            font='RobotoMono',
+            fontsize=12,
+            foreground=colors[6],
+            mouse_callbacks={
+                'Button1': lambda: qtile.cmd_spawn('alacritty -e htop -s PERCENT_CPU')
+            },
+            format='CPU {load_percent}%',
+            update_interval=1
+        ),
+        widget.CPUGraph(
+            type='line',
+            line_width=1,
+            graph_color=colors[5],
+            mouse_callbacks={
+                'Button1': lambda: qtile.cmd_spawn('alacritty -e htop -s PERCENT_CPU')
+            },
+            border_width=0,
+            samples=1000
+        ),
+        widget.Sep(
+            background=colors[1],
+            foreground=colors[5],
+            linewidth=1,
+            padding=10
+        ),
+        widget.TextBox(
+            background=colors[1],
+            font='RobotoMono Nerd Font',
+            fontsize=14,
+            foreground=colors[6],
+            padding=0,
+            text='  '
+        ),
+        widget.Net(
+            background=colors[1],
+            font='RobotoMono',
+            fontsize=12,
+            foreground=colors[5],
+            format='{interface}: {down} ↓ ',
+            interface='all',
+            padding=0
+        ),
+        widget.Sep(
+            background=colors[1],
+            foreground=colors[5],
+            linewidth=1,
+            padding=10
+        ),
+        widget.Battery(
+            background=colors[1],
+            charge_char='',
+            discharge_char='',
+            empty_char='',
+            unknown_char='',
+            font='RobotoMono',
+            format='{char}  {percent:2.0%}',
+            fontsize=12,
+            foreground=colors[5],
+            padding=0
+        ),
+        widget.Sep(
+            background=colors[1],
+            foreground=colors[5],
+            linewidth=1,
+            padding=10
+        ),
+    ]
+
+
 screens = [
-    Screen(top=bar.Bar(widgets=init_widgets_list(1), opacity=1, size=20)),
+    Screen(
+        top=bar.Bar(widgets=init_widgets_list(1), opacity=1, size=20),
+        bottom=bar.Bar(
+            widgets=init_bottom_widgets_list(),
+            opacity=1,
+            size=20
+        )
+    ),
     Screen(top=bar.Bar(widgets=init_widgets_list(2), opacity=1, size=20)),
 ]
 
