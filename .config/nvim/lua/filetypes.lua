@@ -40,6 +40,12 @@ vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
   desc    = 'Lector uses custom file types, but markdown contents.'
 })
 
+vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
+  pattern = {'*.rasi'},
+  command = 'set ft=rasi',
+  desc    = 'Rasi file type (rofi config)'
+})
+
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'python',
   command = 'setl softtabstop=4 shiftwidth=4 tabstop=4 textwidth=100 colorcolumn=99',
@@ -84,8 +90,8 @@ vim.api.nvim_create_autocmd('FileType', {
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = {'pov'},
-  command = 'set filetype=phtml',
-  desc    = 'Inc files are hptml'
+  command = 'set filetype=html',
+  desc    = 'Inc files are html'
 })
 
 vim.api.nvim_create_autocmd('FileType', {
