@@ -61,6 +61,17 @@ map(  'n', '+',            increment_font_size,                                 
 map(  'i', '<C-->',        decrement_font_size,                                                    '[GUI] Increase font size')
 map(  'i', '<C-+>',        increment_font_size,                                                     '[GUI] Decrease font size')
 
+
+
+
+-- Snitch
+
+local ok, snitch = pcall(require, "custom.snitch")
+if ok then
+  map('n', '<leader>s', snitch, '[Snitch] Get all TODO\'s')
+end
+
+
 local status_ok, tmux = pcall(require, "nvim-tmux-navigation")
 if status_ok then
   map('n', '<C-h>',        tmux.NvimTmuxNavigateLeft,                                               '[Navigation] Move focus left' )
