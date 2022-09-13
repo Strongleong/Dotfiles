@@ -1,5 +1,7 @@
+local colorscheme = 'onedark'
+
 require('general')
 require('keymaps')
 require('filetypes')
-require('colorscheme')
 require('plugins')
+require('colorschemes')(colorscheme)
