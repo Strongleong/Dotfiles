@@ -56,9 +56,9 @@ map(  'n', '<C-Down>',     ':resize -3<CR>',                                    
 map(  'v', '>',            '>gv',                                                                   '[Indent] Indent in visual mode vithout leaving to normal mode')
 map(  'v', '<',            '<gv',                                                                   '[Indent] Unindent in visual mode vithout leaving to normal mode')
 
-map(  'n', '-',            decrement_font_size,                                                    '[GUI] Increase font size')
+map(  'n', '-',            decrement_font_size,                                                     '[GUI] Increase font size')
 map(  'n', '+',            increment_font_size,                                                     '[GUI] Decrease font size')
-map(  'i', '<C-->',        decrement_font_size,                                                    '[GUI] Increase font size')
+map(  'i', '<C-->',        decrement_font_size,                                                     '[GUI] Increase font size')
 map(  'i', '<C-+>',        increment_font_size,                                                     '[GUI] Decrease font size')
 
 
@@ -186,6 +186,23 @@ map('', 'T',          "<cmd>lua require'hop'.hint_char1({ direction = require'ho
 map('n', '<leader>e', "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END })<cr>",                                                        '[HOP] Jump to word')
 map('v', '<leader>e', "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END })<cr>",                                                        '[HOP] Jump to word')
 map('o', '<leader>e', "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END, inclusive_jump = true })<cr>",                                 '[HOP] Jump to word inclusive')
+
+-- EasyAlign
+map('x', 'ga', '<Plug>(EasyAlign)', '[EasyAlign] Start interactive EasyAlign in visual mode')
+map('n', 'ga', '<Plug>(EasyAlign)', '[EasyAlign] Start interactive EasyAlign for a motion/text object')
+
+
+-- ToggleTerm
+function _G.set_terminal_keymaps()
+  local opts = {buffer = 0}
+  map('t', '<C-h>', [[<Cmd>wincmd h<CR>]], '[ToggleTerm] Go to left pane',  opts)
+  map('t', '<C-j>', [[<Cmd>wincmd j<CR>]], '[ToggleTerm] Go to down pane',  opts)
+  map('t', '<C-k>', [[<Cmd>wincmd k<CR>]], '[ToggleTerm] Go to up pane',    opts)
+  map('t', '<C-l>', [[<Cmd>wincmd l<CR>]], '[ToggleTerm] Go to right pane', opts)
+end
+
+vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+
 
 -- Hard mode :D
 map({'n', 'v'}, '<Up>',    '<Nop>', '[Hard mode :D] Disable UP key')

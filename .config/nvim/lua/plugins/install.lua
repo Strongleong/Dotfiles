@@ -24,17 +24,25 @@ return packer.startup(function(use)
   use 'nvim-lua/plenary.nvim'
   use 'nvim-lua/popup.nvim'
 
-  use 'RRethy/nvim-align'
+  -- use 'RRethy/nvim-align'
+  use 'junegunn/vim-easy-align'
   use 'famiu/bufdelete.nvim'
   use 'tpope/vim-sleuth'
   use 'tpope/vim-repeat'
-  use 'tpope/vim-commentary'
+
+  use 'JoosepAlviste/nvim-ts-context-commentstring'
+  use 'numToStr/Comment.nvim'
+
   use 'tpope/vim-surround'
   use 'alexghergh/nvim-tmux-navigation'
   use 'lyokha/vim-xkbswitch'
   use 'goolord/alpha-nvim'
   use 'BlakeJC94/alpha-nvim-fortune'
   use { 'phaazon/hop.nvim', branch = 'v1' }
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = function() vim.fn["mkdp#util#install"]() end,
+  })
 
   use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/plenary.nvim' } } }
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
@@ -53,8 +61,13 @@ return packer.startup(function(use)
   use 'norcalli/nvim-colorizer.lua'
   use 'ten3roberts/qf.nvim'
 
+  use 'akinsho/toggleterm.nvim'
+
+  -- use 'windwp/nvim-autopairs'
+
   -- Colorchemes
   use 'rmehri01/onenord.nvim'
+  use 'navarasu/onedark.nvim'
 
   -- CMP plugins
   use 'hrsh7th/nvim-cmp'          -- The completion plugin
@@ -79,6 +92,7 @@ return packer.startup(function(use)
   use 'mattn/emmet-vim'
   use 'rafamadriz/friendly-snippets'
 
+  -- Git
   use 'TimUntersberger/neogit'
   use 'tpope/vim-fugitive'
   use 'sindrets/diffview.nvim'
@@ -94,8 +108,7 @@ return packer.startup(function(use)
   use 'ibhagwan/fzf-lua'
   use 'nvim-telescope/telescope-dap.nvim'
   use 'theHamsta/nvim-dap-virtual-text'
-  use 'Pocco81/dap-buddy.nvim'
-
+  use 'ravenxrz/DAPInstall.nvim'
 
   if PACKER_BOOTSTRAP then
     require('packer').sync()

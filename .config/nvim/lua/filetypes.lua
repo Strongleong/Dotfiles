@@ -84,7 +84,7 @@ vim.api.nvim_create_autocmd('FileType', {
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = {'css', 'typescript', 'javascript', 'mustache', 'htmljinja', 'html'},
-  command = 'setl textwidth=120 softtabstop=2 shiftwidth=2 tabstop=2 colorcolumn=120',
+  command = 'setl textwidth=100 softtabstop=2 shiftwidth=2 tabstop=2 colorcolumn=120',
   desc    = 'Javascript, CSS, and html settings'
 })
 
