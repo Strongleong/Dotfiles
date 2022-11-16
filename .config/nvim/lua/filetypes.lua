@@ -48,43 +48,43 @@ vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'python',
-  command = 'setl softtabstop=4 shiftwidth=4 tabstop=4 textwidth=100 colorcolumn=99',
+  command = 'setl softtabstop=4 shiftwidth=4 tabstop=4 textwidth=100',
   desc    = 'Make python follow PEP8'
 })
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'rst',
-  command = 'setl textwidth=80 colorcolumn=81',
+  command = 'setl textwidth=80',
   desc    = 'Make python follow PEP8'
 })
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = {'cucumber', 'yaml', 'sass', 'scss', 'ruby', 'eruby', 'less'},
-  command = 'setl softtabstop=2 shiftwidth=2 tabstop=2 colorcolumn=100',
+  command = 'setl softtabstop=2 shiftwidth=2 tabstop=2',
   desc    = 'Make ruby,scss,sass,less use 2 spaces for indentation.',
 })
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'php',
-  command = 'setl textwidth=120 softtabstop=4 shiftwidth=4 tabstop=4 colorcolumn=120',
+  command = 'setl textwidth=120 softtabstop=4 shiftwidth=4 tabstop=4',
   desc    = 'PHP settings'
 })
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'go',
-  command = 'setl textwidth=120 softtabstop=4 shiftwidth=4 tabstop=4 noexpandtab colorcolumn=100',
+  command = 'setl textwidth=120 softtabstop=4 shiftwidth=4 tabstop=4 noexpandtab',
   desc    = 'Golang settings'
 })
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'markdown',
-  command = 'setl textwidth=80 softtabstop=4 shiftwidth=4 tabstop=4 colorcolumn=79',
+  command = 'setl textwidth=80 softtabstop=4 shiftwidth=4 tabstop=4',
   desc    = 'Markdown settings'
 })
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = {'css', 'typescript', 'javascript', 'mustache', 'htmljinja', 'html'},
-  command = 'setl textwidth=100 softtabstop=2 shiftwidth=2 tabstop=2 colorcolumn=120',
+  command = 'setl textwidth=100 softtabstop=2 shiftwidth=2 tabstop=2',
   desc    = 'Javascript, CSS, and html settings'
 })
 
@@ -96,6 +96,6 @@ vim.api.nvim_create_autocmd('FileType', {
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = {'coffee', 'groovy', 'elm', 'dockerfile'},
-  command = 'setl textwidth=100 softtabstop=2 shiftwidth=2 tabstop=2 colorcolumn=100',
+  command = 'setl textwidth=100 softtabstop=2 shiftwidth=2 tabstop=2',
   desc    = 'CoffeeScript, Groovy, Elm, Docker'
 })

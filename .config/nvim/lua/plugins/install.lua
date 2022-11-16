@@ -24,7 +24,6 @@ return packer.startup(function(use)
   use 'nvim-lua/plenary.nvim'
   use 'nvim-lua/popup.nvim'
 
-  -- use 'RRethy/nvim-align'
   use 'junegunn/vim-easy-align'
   use 'famiu/bufdelete.nvim'
   use 'tpope/vim-sleuth'
@@ -33,12 +32,12 @@ return packer.startup(function(use)
   use 'JoosepAlviste/nvim-ts-context-commentstring'
   use 'numToStr/Comment.nvim'
 
-  use 'tpope/vim-surround'
+  use 'kylechui/nvim-surround'
   use 'alexghergh/nvim-tmux-navigation'
   use 'lyokha/vim-xkbswitch'
   use 'goolord/alpha-nvim'
   use 'BlakeJC94/alpha-nvim-fortune'
-  use { 'phaazon/hop.nvim', branch = 'v1' }
+  use 'phaazon/hop.nvim'
   use({
     "iamcco/markdown-preview.nvim",
     run = function() vim.fn["mkdp#util#install"]() end,
@@ -46,7 +45,6 @@ return packer.startup(function(use)
 
   use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/plenary.nvim' } } }
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-  use 'nvim-telescope/telescope-media-files.nvim'
 
   use 'nvim-lualine/lualine.nvim'
 
@@ -55,7 +53,6 @@ return packer.startup(function(use)
 
   use 'vifm/vifm.vim'
 
-  use 'preservim/tagbar'
   use 'fedepujol/move.nvim'
 
   use 'norcalli/nvim-colorizer.lua'
@@ -65,9 +62,10 @@ return packer.startup(function(use)
 
   -- use 'windwp/nvim-autopairs'
 
+  use 'j-hui/fidget.nvim'
+
   -- Colorchemes
-  use 'rmehri01/onenord.nvim'
-  use 'navarasu/onedark.nvim'
+  use "EdenEast/nightfox.nvim"
 
   -- CMP plugins
   use 'hrsh7th/nvim-cmp'          -- The completion plugin
@@ -83,9 +81,11 @@ return packer.startup(function(use)
   use 'williamboman/nvim-lsp-installer'
   use 'neovim/nvim-lspconfig'
   use 'jose-elias-alvarez/null-ls.nvim' -- For formatters and linters
+  use 'glepnir/lspsaga.nvim'
 
   -- Treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use 'nvim-treesitter/nvim-treesitter-textobjects'
 
   -- Snippets
   use 'L3MON4D3/LuaSnip'
@@ -105,7 +105,6 @@ return packer.startup(function(use)
   use 'mfussenegger/nvim-dap'
   use 'rcarriga/nvim-dap-ui'
   use 'rcarriga/cmp-dap'
-  use 'ibhagwan/fzf-lua'
   use 'nvim-telescope/telescope-dap.nvim'
   use 'theHamsta/nvim-dap-virtual-text'
   use 'ravenxrz/DAPInstall.nvim'

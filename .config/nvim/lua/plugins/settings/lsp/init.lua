@@ -42,6 +42,13 @@ local config = {
 
 vim.diagnostic.config(config)
 
+vim.cmd([[
+  sign define DiagnosticSignError text= texthl=DiagnosticSignError linehl= numhl=
+  sign define DiagnosticSignWarn  text= texthl=DiagnosticSignWarn  linehl= numhl=
+  sign define DiagnosticSignInfo  text= texthl=DiagnosticSignInfo  linehl= numhl=
+  sign define DiagnosticSignHint  text= texthl=DiagnosticSignHint  linehl= numhl=
+]])
+
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
   border = "none",
 })
@@ -50,18 +57,26 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
   border = "none",
 })
 
-local capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local servers = installer.get_installed_servers()
 
 for _, server in pairs(servers) do
+
   local ok, settings = pcall(require, "plugins.settings.lsp." .. server.name)
+  local srv_config = {}
+
   if not ok then
-    settings = {}
+    srv_config = {
+      on_attach = keymaps.on_attach,
+      capabilities = capabilities,
+    }
+  else
+    srv_config = {
+      on_attach = keymaps.on_attach,
+      capabilities = capabilities,
+      settings = settings,
+    }
   end
 
-  lspconfig[server.name].setup({
-    on_attach = keymaps.on_attach,
-    capabilities = capabilities,
-    settings = settings,
-  })
+  lspconfig[server.name].setup(srv_config)
 end

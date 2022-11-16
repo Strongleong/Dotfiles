@@ -1,0 +1,24 @@
+{
+  "Protected call": {
+    "prefix":  "pcall",
+    "body": [
+      "local ok, ${1:module} = pcall(require, '${2:module}')",
+      "if not ok then",
+      "  vim.notify('Error. ${3:moule} is not installed')",
+      "  return",
+      "end"
+    ],
+    "description": "Protected call"
+  },
+  "Protected call without local": {
+    "prefix":  "lpcall",
+    "body": [
+      "ok, ${1:module} = pcall(require, '${2:module}')",
+      "if not ok then",
+      "  vim.notify('Error. ${3:moule} is not installed')",
+      "  return",
+      "end"
+    ],
+    "description": "Protected call without local"
+  }
+}

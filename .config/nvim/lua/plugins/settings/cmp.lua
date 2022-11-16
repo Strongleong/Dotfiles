@@ -1,3 +1,4 @@
+---@diagnostic disable: unused-local
 local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
     vim.notify('Error. CMP is not found')
@@ -126,6 +127,11 @@ cmp.setup({
         ghost_text = true,
         native_menu = false,
     },
+    confirmation = {
+        get_commit_characters = function(commit_characters)
+            return {}
+        end
+    }
 })
 
 cmp.setup.cmdline(':', {

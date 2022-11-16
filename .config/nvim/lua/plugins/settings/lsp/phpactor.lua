@@ -42,5 +42,5 @@ function LspPhpactorStatus()
 end
 
 return {
-    filetypes = { "php", "hack", "phtml" }
+    filetypes = { "php" }
 }

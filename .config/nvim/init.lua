@@ -1,4 +1,4 @@
-local colorscheme = 'onedark'
+local colorscheme = 'nightfox'
 
 require('general')
 require('keymaps')

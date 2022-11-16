@@ -1,6 +1,8 @@
 vim.cmd('syntax on')
 vim.cmd('filetype plugin indent on')
 
+require 'custom.market-sftp-upload'
+
 local path        = vim.opt.path + '**'
 local clipboard   = 'unnamedplus'
 local completeopt = {'menuone', 'noselect'}
@@ -50,6 +52,12 @@ vim.opt.wrap           = false         -- Display lines as one long line
 vim.opt.scrolloff      = 8             -- Do not wait cursor at bottom to scroll
 vim.opt.sidescrolloff  = 8             -- Same as previous but horizontaly
 vim.opt.guifont        = font          -- The font used in graphical neovim applications
+
+if vim.g.neovide then
+  vim.g.neovide_transparency = 0.8
+else
+  vim.g.background = 0;
+end
 
 -- Automatically strip trailing spaces on save
 vim.api.nvim_create_autocmd('BufWritePre', {

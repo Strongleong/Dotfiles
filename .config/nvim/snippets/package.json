@@ -1,0 +1,26 @@
+{
+  "name": "StrongLeSnippets",
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": "php",
+        "path": "./snippets/php.json"
+      },
+      {
+        "language": "vue",
+        "path": "./snippets/frameworks/vue/vue.json"
+      },
+      {
+        "language": "lua",
+        "path": "./snippets/lua.json"
+      },
+      {
+        "language": "typescript",
+        "path": "./snippets/ts.json"
+      }
+    ]
+  }
+}
