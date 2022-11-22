@@ -1,9 +1,15 @@
-local installer, lspconfig, keymaps, cmp_nvim_lsp
+local mason, masonlspconfig, lspconfig, keymaps, cmp_nvim_lsp
 local status_ok
 
-status_ok, installer = pcall(require, "nvim-lsp-installer")
+status_ok, mason = pcall(require, "mason")
 if not status_ok then
-  vim.notify("Error. Nvim LSP installer is not installed")
+  vim.notify("Error. Mason is not installed")
+  return
+end
+
+status_ok, masonlspconfig = pcall(require, "mason-lspconfig")
+if not status_ok then
+  vim.notify("Error. Mason-lspconfig is not installed")
   return
 end
 
@@ -25,7 +31,8 @@ if not status_ok then
   return
 end
 
-installer.setup({})
+mason.setup({})
+masonlspconfig.setup({})
 
 local config = {
   virtual_text = true,
@@ -58,11 +65,11 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 })
 
 local capabilities = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
-local servers = installer.get_installed_servers()
+local servers = masonlspconfig.get_installed_servers()
 
 for _, server in pairs(servers) do
 
-  local ok, settings = pcall(require, "plugins.settings.lsp." .. server.name)
+  local ok, settings = pcall(require, "plugins.settings.lsp." .. server)
   local srv_config = {}
 
   if not ok then
@@ -78,5 +85,5 @@ for _, server in pairs(servers) do
     }
   end
 
-  lspconfig[server.name].setup(srv_config)
+  lspconfig[server].setup(srv_config)
 end

@@ -6,6 +6,12 @@ end
 
 local cache_dir = vim.fn.stdpath("cache") .. "/nightfox"
 
+if vim.g.neovide then
+  cache_dir = cache_dir .. "/gui"
+else
+  cache_dir = cache_dir .. "/cli"
+end
+
 -- Default options
 nightfox.setup({
   options = {
