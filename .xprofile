@@ -10,4 +10,9 @@ export PATH="$HOME/.local/bin":$PATH
 
 /usr/bin/pipewire-media-session &
 /usr/bin/numlockx on &
+/bin/sh -c feh --randomize --bg-fill /usr/share/backgrounds/* &
+/usr/bin/picom -f --animations --experimental-backends -b --animation-stiffness 330 --animation-dampening 8 --animation-window-mass 0.5 --animation-for-open-window zoom &
+/usr/local/bin/slstatus &
+/usr/bin/volumeicon &
+/usr/bin/unclutter &
 /usr/bin/setxkbmap -layout "us,ru" -option "grp:alt_shift_toggle" &
