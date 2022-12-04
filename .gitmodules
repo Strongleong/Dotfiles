@@ -7,3 +7,6 @@
 [submodule ".config/vifm/vifmimg"]
 	path = .config/vifm/vifmimg
 	url = https://github.com/cirala/vifmimg
+[submodule ".config/nvim"]
+	path = .config/nvim
+	url = git@github.com:Strongleong/Neovim.git
