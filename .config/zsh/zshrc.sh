@@ -72,6 +72,7 @@ zsh_add_plugin "dim-an/cod"
 bindkey -s '^o' 'vifm^M'
 bindkey -s '^f' 'zi^M'
 bindkey -s '^s' 'ncdu^M'
+bindkey '^y' zsh_switch_prompt
 # bindkey -s '^n' 'nvim $(fzf)^M'
 # bindkey -s '^v' 'nvim\n'
 bindkey -s '^z' 'zi^M'
@@ -98,3 +99,5 @@ export BROWSER="firefox"
 
 # For QT Themes
 export QT_QPA_PLATFORMTHEME=qt5ct
+
+source /usr/share/nvm/init-nvm.sh

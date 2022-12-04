@@ -13,8 +13,8 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
 # confirm before overwriting something
-alias cp="cp -i"
-alias mv='mv -i'
+alias cp="cp"
+alias mv='mv'
 
 # easier to read disk
 alias df='df -h'     # human-readable sizes
