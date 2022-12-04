@@ -1,5 +1,7 @@
 {
   "indexer.stub_paths": [
     "/home/strongleong/projects/core/"
-  ]
+  ],
+  "language_server_php_cs_fixer.enabled": true,
+  "language_server_php_cs_fixer.bin": "/home/strongleong/.config/composer/vendor/bin/php-cs-fixer"
 }
