@@ -78,7 +78,7 @@ window:
   # Window opacity as a floating point number from `0.0` to `1.0`.
   # The value `0.0` is completely transparent and `1.0` is opaque.
   # opacity: 1.0
-  opacity: 1.00
+  opacity: 0.80
 scrolling:
   # Maximum number of lines in the scrollback buffer.
   # Specifying '0' will disable scrolling.
@@ -241,7 +241,7 @@ schemes:
   ### Dracula ###
   Dracula: &Dracula
     primary:
-      background: '#282a36'
+      background: '#19212f'
       foreground: '#f8f8f2'
     cursor:
       text: CellBackground
@@ -256,7 +256,7 @@ schemes:
       focused_match:
         foreground: '#44475a'
         background: '#ffb86c'
-      bar:
+      footer_bar:
         background: '#282a36'
         foreground: '#f8f8f2'
     line_indicator:
@@ -522,7 +522,7 @@ schemes:
   OneNord: &OneNord
     # Default colors
     primary:
-      background: '0x2E3440'
+      background: '0x19212F'
       foreground: '0xC8D0E0'
     # Normal colors
     normal:
@@ -551,7 +551,7 @@ schemes:
       focused_match:
         foreground: '#EBCB8B'
         background: '#4C566A'
-      bar:
+      footer_bar:
         background: '#434C5E'
         foreground: '#88C0D0'
     hints:
@@ -564,6 +564,62 @@ schemes:
     selection:
       text: CellForeground
       background: '#3F4758'
+  ### SpaceDuck (https://github.com/pineapplegiant/spaceduck-terminal) ###
+  SpaceDuck: &SpaceDuck
+    # Default colors
+    primary:
+      background: '#0f111b'
+      foreground: '#ecf0c1'
+    # Normal colors
+    normal:
+      black:   '#000000'
+      red:     '#e33400'
+      green:   '#5ccc96'
+      yellow:  '#b3a1e6'
+      blue:    '#00a3cc'
+      magenta: '#f2ce00'
+      cyan:    '#7a5ccc'
+      white:   '#686f9a'
+
+    # Bright colors
+    bright:
+      black:   '#686f9a'
+      red:     '#e33400'
+      green:   '#5ccc96'
+      yellow:  '#b3a1e6'
+      blue:    '#00a3cc'
+      magenta: '#f2ce00'
+      cyan:    '#7a5ccc'
+      white:   '#f0f1ce'
+  ### Nightfox (https://github.com/EdenEast/nightfox.nvim/blob/main/extra/nightfox/nightfox_alacritty.yml) ###
+  Nightfox: &Nightfox
+    # Default colors
+    primary:
+      background: '0x192330'
+      foreground: '0xcdcecf'
+    # Normal colors
+    normal:
+      black:   '0x393b44'
+      red:     '0xc94f6d'
+      green:   '0x81b29a'
+      yellow:  '0xdbc074'
+      blue:    '0x719cd6'
+      magenta: '0x9d79d6'
+      cyan:    '0x63cdcf'
+      white:   '0xdfdfe0'
+    # Bright colors
+    bright:
+      black:   '0x575860'
+      red:     '0xd16983'
+      green:   '0x8ebaa4'
+      yellow:  '0xe0c989'
+      blue:    '0x86abdc'
+      magenta: '0xbaa1e2'
+      cyan:    '0x7ad4d6'
+      white:   '0xe4e4e5'
+    indexed_colors:
+      - { index: 16, color: '0xf4a261' }
+      - { index: 17, color: '0xd67ad2' }
 ######################################################################
 ## SET THEME: Choose ONE color scheme from those in the above list. ##
 ## ###################################################################
@@ -579,7 +635,9 @@ schemes:
 # *SolarizedDark
 # *TomorrowNight
 # *OneNord
-colors: *OneNord
+# *SpaceDuck
+# *Nightfox
+colors: *Nightfox
 #######################################
 ##       END OF COLOR SCHEMES        ##
 #######################################
