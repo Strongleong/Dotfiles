@@ -92,12 +92,4 @@ bindkey -M vicmd "j" down-line-or-beginning-search
 autoload edit-command-line; zle -N edit-command-line
 # bindkey '^e' edit-command-line
 
-# Environment variables set everywhere
-export EDITOR="nvim"
-export TERMINAL="alacritty"
-export BROWSER="firefox"
-
-# For QT Themes
-export QT_QPA_PLATFORMTHEME=qt5ct
-
-source /usr/share/nvm/init-nvm.sh
+# source /usr/share/nvm/init-nvm.sh
