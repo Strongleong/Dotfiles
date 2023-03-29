@@ -1,0 +1,8 @@
+super + n
+  bgctl next
+
+super + p
+  bgctl prev
+
+super + q
+  $BROWSER
