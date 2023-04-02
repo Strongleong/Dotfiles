@@ -110,13 +110,13 @@ font:
     #   - (Windows) Consolas
     # family: Hack Nerd Font
     # family: CodeNewRoman Nerd Font
-    family: RobotoMono Nerd Font
+    # family: RobotoMono Nerd Font
     # family: Hack Nerd Font
     # family: JetBrains Mono
     # family: UbuntuMono Nerd Font
     # family: Monofur Nerd Font
     # family: TerminessTTF Nerd Font
-    # family: Mononoki Nerd Font
+    family: Mononoki Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Regular
@@ -128,13 +128,13 @@ font:
     # value specified for the normal font.
     # family: Hack Nerd Font
     # family: CodeNewRoman Nerd Font
-    family: RobotoMono Nerd Font
+    # family: RobotoMono Nerd Font
     # family: Hack Nerd Font
     # family: JetBrains Mono
     # family: UbuntuMono Nerd Font
     # family: Monofur Nerd Font
     # family: TerminessTTF Nerd Font
-    # family: Mononoki Nerd Font
+    family: Mononoki Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Bold
@@ -146,13 +146,13 @@ font:
     # value specified for the normal font.
     # family: Hack Nerd Font
     # family: CodeNewRoman Nerd Font
-    family: RobotoMono Nerd Font
+    # family: RobotoMono Nerd Font
     # family: Hack Nerd Font
     # family: JetBrains Mono
     # family: UbuntuMono Nerd Font
     # family: Monofuritalic Nerd Font Mono
     # family: TerminessTTF Nerd Font
-    # family: Mononoki Nerd Font
+    family: Mononoki Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Italic
@@ -164,13 +164,13 @@ font:
     # value specified for the normal font.
     # family: Hack Nerd Font
     # family: CodeNewRoman Nerd Font
-    family: RobotoMono Nerd Font
+    # family: RobotoMono Nerd Font
     # family: Hack Nerd Font
     # family: JetBrains Mono
     # family: UbuntuMono Nerd Font
     # family: Monofuritalic Nerd Font Mono
     # family: TerminessTTF Nerd Font
-    # family: Mononoki Nerd Font
+    family: Mononoki Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Bold Italic

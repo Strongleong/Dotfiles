@@ -5,4 +5,7 @@ super + p
   bgctl prev
 
 super + q
-  $BROWSER
+  firefox-gui
+
+Print
+  flameshot gui
