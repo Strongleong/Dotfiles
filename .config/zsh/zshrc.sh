@@ -14,6 +14,7 @@ unsetopt BEEP
 
 # completions
 autoload -Uz compinit
+zstyle ':completion:*' rehash true
 zstyle ':completion:*' menu select
 # zstyle ':completion::complete:lsof:*' menu yes select
 zmodload zsh/complist
@@ -32,7 +33,6 @@ source "$ZDOTDIR/functions.sh"
 
 # Normal files to source
 zsh_add_file "exports.sh"
-zsh_add_file "vim-mode.sh"
 zsh_add_file "aliases.sh"
 zsh_add_file "prompt.sh"
 
@@ -56,6 +56,9 @@ zsh_add_plugin "casonadams/alacritty-shell"
 # zsh_add_plugin "keithhamilton/oh-my-dogesh"
 zsh_add_plugin "mbenford/zsh-tmux-auto-title"
 zsh_add_plugin "jsahlen/tmux-vim-integration.plugin.zsh"
+zsh_add_plugin "softmoth/zsh-vim-mode"
+
+zsh_add_file "vim-mode.sh"
 
 compinit -u
 fpath=(./zsh-completions/src $fpath)
