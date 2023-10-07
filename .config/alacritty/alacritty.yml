@@ -113,10 +113,10 @@ font:
     # family: RobotoMono Nerd Font
     # family: Hack Nerd Font
     # family: JetBrains Mono
-    # family: UbuntuMono Nerd Font
+    family: UbuntuMono Nerd Font
     # family: Monofur Nerd Font
     # family: TerminessTTF Nerd Font
-    family: Mononoki Nerd Font
+    # family: Mononoki Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Regular
@@ -131,10 +131,10 @@ font:
     # family: RobotoMono Nerd Font
     # family: Hack Nerd Font
     # family: JetBrains Mono
-    # family: UbuntuMono Nerd Font
+    family: UbuntuMono Nerd Font
     # family: Monofur Nerd Font
     # family: TerminessTTF Nerd Font
-    family: Mononoki Nerd Font
+    # family: Mononoki Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Bold
@@ -149,10 +149,10 @@ font:
     # family: RobotoMono Nerd Font
     # family: Hack Nerd Font
     # family: JetBrains Mono
-    # family: UbuntuMono Nerd Font
+    family: UbuntuMono Nerd Font
     # family: Monofuritalic Nerd Font Mono
     # family: TerminessTTF Nerd Font
-    family: Mononoki Nerd Font
+    # family: Mononoki Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Italic
@@ -167,15 +167,15 @@ font:
     # family: RobotoMono Nerd Font
     # family: Hack Nerd Font
     # family: JetBrains Mono
-    # family: UbuntuMono Nerd Font
+    family: UbuntuMono Nerd Font
     # family: Monofuritalic Nerd Font Mono
     # family: TerminessTTF Nerd Font
-    family: Mononoki Nerd Font
+    # family: Mononoki Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Bold Italic
   # Point size
-  size: 10.0
+  size: 12.0
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
   offset:
@@ -918,7 +918,7 @@ key_bindings:
   - {key: Copy, mods: None, action: Copy}
   - {key: M, mods: Control, action: ClearLogNotice}
   - {key: M, mods: Control, chars: "\f"}
-  - {key: PageUp, mods: None, action: ScrollPageUp, mode: ~Alt}
-  - {key: PageDown, mods: None, action: ScrollPageDown, mode: ~Alt}
+  - {key: PageUp, mods: Shift, action: ScrollPageUp, mode: ~Alt}
+  - {key: PageDown, mods: Shift, action: ScrollPageDown, mode: ~Alt}
   - {key: Home, mods: Shift, action: ScrollToTop, mode: ~Alt}
   - {key: End, mods: Shift, action: ScrollToBottom, mode: ~Alt}
