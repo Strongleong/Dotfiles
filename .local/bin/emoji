@@ -1,0 +1,2 @@
+#!/bin/bash
+e=`echo '' | dmenu -p Emoji:` && curl -G https://api.getdango.com/api/emoji --data-urlencode "q=$e" | jq '.results[].text' -r | xclip -sel clip
