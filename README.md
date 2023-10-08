@@ -29,11 +29,11 @@ List of software to install when I am gonna deploy my shit on new pc (no in part
  - picom (original one)
  - sddm
  - [sddm-theme-corners](https://github.com/aczw/sddm-theme-corners) (put `passwordMaskDelay: 1000` in `corners/components/PasswordPanel.qml`)
- - (xkb-switch)[https://github.com/grwlf/xkb-switch.git]
- - (my dwm)[https://github.com/strongleong/dwm]
- - (my dwmblocks)[https://github.com/strongleong/dwmblocks]
- - (my dmenu)[https://github.com/strongleong/dmenu]
- - (my neovim)[https://github.com/strongleong/neovim]
+ - [xkb-switch](https://github.com/grwlf/xkb-switch.git)
+ - [my dwm](https://github.com/strongleong/dwm)
+ - [my dwmblocks](https://github.com/strongleong/dwmblocks)
+ - [my dmenu](https://github.com/strongleong/dmenu)
+ - [my neovim](https://github.com/strongleong/neovim)
  - setxkbmap
  - pipewire
  - volumeicon
