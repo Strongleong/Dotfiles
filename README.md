@@ -26,7 +26,7 @@ List of software to install when I am gonna deploy my shit on new pc (no in part
  - silver search (ag)
  - fd_find
  - zsh
- - picom (original one)
+ - picom (original one or [this](https://github.com/pijulius/picom) fork)
  - sddm
  - [sddm-theme-corners](https://github.com/aczw/sddm-theme-corners) (put `passwordMaskDelay: 1000` in `corners/components/PasswordPanel.qml`)
  - [xkb-switch](https://github.com/grwlf/xkb-switch.git)
