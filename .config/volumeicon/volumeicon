@@ -8,7 +8,7 @@ notification_type=0
 
 [StatusIcon]
 stepsize=5
-onclick=xterm -e 'alsamixer'
+onclick=alacritty -e 'alsamixer'
 theme=Blue Bar
 use_panel_specific_icons=false
 lmb_slider=true
