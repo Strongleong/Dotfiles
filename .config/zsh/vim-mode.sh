@@ -4,6 +4,8 @@ MODE_CURSOR_VICMD="white block"
 MODE_CURSOR_SEARCH="#ff00ff steady underline"
 MODE_CURSOR_VISUAL="$MODE_CURSOR_VICMD steady bar"
 MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #ffffff"
+KEYTIMEOUT=1
+VIM_MODE_ESC_PREFIXED_WANTED='^?^Hbdfhul.g'
 
 
 # # bindkey -e will be emacs mode

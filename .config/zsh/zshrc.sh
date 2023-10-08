@@ -45,8 +45,16 @@ zsh_add_file "prompt.sh"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
 
+eval "$(zoxide init zsh)"
+
 fpath+="$ZDOTDIR/completion/"
 
+export NVM_LAZY_LOAD=true
+export NVM_COMPLETION=true
+
+zsh_add_file "vim-mode.sh"
+
+compinit -u
 # Plugins
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
 zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
@@ -57,16 +65,13 @@ zsh_add_plugin "casonadams/alacritty-shell"
 zsh_add_plugin "mbenford/zsh-tmux-auto-title"
 zsh_add_plugin "jsahlen/tmux-vim-integration.plugin.zsh"
 zsh_add_plugin "softmoth/zsh-vim-mode"
+zsh_add_plugin "lukechilds/zsh-nvm"
 
-zsh_add_file "vim-mode.sh"
-
-compinit -u
 fpath=(./zsh-completions/src $fpath)
 
 zsh_add_plugin "dim-an/cod"
 
 # zsh_add_completion "git-completion.zsh"
-
 # zsh_add_completion "esc/conda-zsh-completion" false
 # For more plugins: https://github.com/unixorn/awesome-zsh-plugins
 # More completions https://github.com/zsh-users/zsh-completions
@@ -95,6 +100,10 @@ bindkey -M vicmd "j" down-line-or-beginning-search
 autoload edit-command-line; zle -N edit-command-line
 # bindkey '^e' edit-command-line
 
-export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+# zmodload zsh/zprof
+#
+# export NVM_DIR="$HOME/.config/nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
