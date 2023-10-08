@@ -44,4 +44,4 @@ List of software to install when I am gonna deploy my shit on new pc (no in part
  - flameshot
  - keepassxc
  - vifm
- - [lock screen](https://github.com/oakszyjrnrdy/betterlockscreen_rapid)
+ - [screen locker](https://github.com/oakszyjrnrdy/betterlockscreen_rapid)
