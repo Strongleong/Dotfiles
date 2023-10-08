@@ -45,3 +45,5 @@ List of software to install when I am gonna deploy my shit on new pc (no in part
  - keepassxc
  - vifm
  - [screen locker](https://github.com/oakszyjrnrdy/betterlockscreen_rapid)
+ - zoxide
+ - cmake
