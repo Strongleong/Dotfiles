@@ -1,6 +1,7 @@
 # My awsome dotfiles
 
 TODO:
+
  [ ] Switch from git bare repo to something more usable
  [ ] Make a proper README.md with sick screenshots and gifs/videos so internet people who randomly stumbled on this repo would think thant I am cool :(
 
