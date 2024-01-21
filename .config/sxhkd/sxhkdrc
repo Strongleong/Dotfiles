@@ -5,10 +5,16 @@ super + p
   bgctl prev
 
 super + q
-  firefox-bin
+  firefox
 
 Print
   flameshot gui
 
 control + shift + l
   betterlockscreen_rapid 31 3
+
+XF86MonBrightnessUp
+  xbacklight -inc 10
+
+XF86MonBrightnessDown
+  xbacklight -dec 10

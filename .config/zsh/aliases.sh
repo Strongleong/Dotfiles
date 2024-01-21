@@ -4,6 +4,7 @@
 alias zsh-update-plugins="find "$ZDOTDIR/plugins" -type d -exec test -e '{}/.git' ';' -print0 | xargs -I {} -0 git -C {} pull -q"
 alias ll='ls -lh --group-directories-first --color=auto'
 alias la='ll -a'
+alias neogit='nvim -c "augroup meh | au! TabClosed * quitall | augroup END" -c "Neogit"'
 
 # Colorize grep output (good for log files)
 alias grep='grep --color=auto'

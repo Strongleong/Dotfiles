@@ -1,0 +1,406 @@
+[schemes.DoomOne.bright]
+black = "#5b6268"
+blue = "#3071db"
+cyan = "#46d9ff"
+green = "#4db5bd"
+magenta = "#a9a1e1"
+red = "#da8548"
+white = "#dfdfdf"
+yellow = "#ecbe7b"
+
+[schemes.DoomOne.cursor]
+cursor = "#528bff"
+text = "CellBackground"
+
+[schemes.DoomOne.normal]
+black = "#1c1f24"
+blue = "#51afef"
+cyan = "#5699af"
+green = "#98be65"
+magenta = "#c678dd"
+red = "#ff6c6b"
+white = "#202328"
+yellow = "#da8548"
+
+[schemes.DoomOne.primary]
+background = "#282c34"
+foreground = "#bbc2cf"
+
+[schemes.DoomOne.selection]
+background = "#3e4451"
+text = "CellForeground"
+
+[schemes.Dracula.bright]
+black = "#4d4d4d"
+blue = "#caa9fa"
+cyan = "#9aedfe"
+green = "#5af78e"
+magenta = "#ff92d0"
+red = "#ff6e67"
+white = "#e6e6e6"
+yellow = "#f4f99d"
+
+[schemes.Dracula.cursor]
+cursor = "CellForeground"
+text = "CellBackground"
+
+[schemes.Dracula.dim]
+black = "#14151b"
+blue = "#4d5b86"
+cyan = "#59dffc"
+green = "#1ef956"
+magenta = "#ff46b0"
+red = "#ff2222"
+white = "#e6e6d1"
+yellow = "#ebf85b"
+
+[schemes.Dracula.line_indicator]
+background = "None"
+foreground = "None"
+
+[schemes.Dracula.normal]
+black = "#000000"
+blue = "#bd93f9"
+cyan = "#8be9fd"
+green = "#50fa7b"
+magenta = "#ff79c6"
+red = "#ff5555"
+white = "#bfbfbf"
+yellow = "#f1fa8c"
+
+[schemes.Dracula.primary]
+background = "#19212f"
+foreground = "#f8f8f2"
+
+[schemes.Dracula.search.focused_match]
+background = "#ffb86c"
+foreground = "#44475a"
+
+[schemes.Dracula.search.footer_bar]
+background = "#282a36"
+foreground = "#f8f8f2"
+
+[schemes.Dracula.search.matches]
+background = "#50fa7b"
+foreground = "#44475a"
+
+[schemes.Dracula.selection]
+background = "#44475a"
+text = "CellForeground"
+
+[schemes.Dracula.vi_mode_cursor]
+cursor = "CellForeground"
+text = "CellBackground"
+
+[schemes.GruvboxDark.bright]
+black = "#928374"
+blue = "#83a598"
+cyan = "#8ec07c"
+green = "#b8bb26"
+magenta = "#d3869b"
+red = "#fb4934"
+white = "#ebdbb2"
+yellow = "#fabd2f"
+
+[schemes.GruvboxDark.normal]
+black = "#282828"
+blue = "#458588"
+cyan = "#689d6a"
+green = "#98971a"
+magenta = "#b16286"
+red = "#cc241d"
+white = "#a89984"
+yellow = "#d79921"
+
+[schemes.GruvboxDark.primary]
+background = "#282828"
+foreground = "#ebdbb2"
+
+[schemes.MonokaiPro.bright]
+black = "#727072"
+blue = "#FC9867"
+cyan = "#78DCE8"
+green = "#A9DC76"
+magenta = "#AB9DF2"
+red = "#FF6188"
+white = "#FCFCFA"
+yellow = "#FFD866"
+
+[schemes.MonokaiPro.normal]
+black = "#403E41"
+blue = "#FC9867"
+cyan = "#78DCE8"
+green = "#A9DC76"
+magenta = "#AB9DF2"
+red = "#FF6188"
+white = "#FCFCFA"
+yellow = "#FFD866"
+
+[schemes.MonokaiPro.primary]
+background = "#2D2A2E"
+foreground = "#FCFCFA"
+
+[[schemes.Nightfox.indexed_colors]]
+color = "0xf4a261"
+index = 16
+
+[[schemes.Nightfox.indexed_colors]]
+color = "0xd67ad2"
+index = 17
+
+[schemes.Nightfox.bright]
+black = "0x575860"
+blue = "0x86abdc"
+cyan = "0x7ad4d6"
+green = "0x8ebaa4"
+magenta = "0xbaa1e2"
+red = "0xd16983"
+white = "0xe4e4e5"
+yellow = "0xe0c989"
+
+[schemes.Nightfox.normal]
+black = "0x393b44"
+blue = "0x719cd6"
+cyan = "0x63cdcf"
+green = "0x81b29a"
+magenta = "0x9d79d6"
+red = "0xc94f6d"
+white = "0xdfdfe0"
+yellow = "0xdbc074"
+
+[schemes.Nightfox.primary]
+background = "0x192330"
+foreground = "0xcdcecf"
+
+[schemes.Nord.bright]
+black = "#4C566A"
+blue = "#81A1C1"
+cyan = "#8FBCBB"
+green = "#A3BE8C"
+magenta = "#B48EAD"
+red = "#BF616A"
+white = "#ECEFF4"
+yellow = "#EBCB8B"
+
+[schemes.Nord.normal]
+black = "#3B4252"
+blue = "#81A1C1"
+cyan = "#88C0D0"
+green = "#A3BE8C"
+magenta = "#B48EAD"
+red = "#BF616A"
+white = "#E5E9F0"
+yellow = "#EBCB8B"
+
+[schemes.Nord.primary]
+background = "#2E3440"
+foreground = "#D8DEE9"
+
+[schemes.OceanicNext.bright]
+black = "#343d46"
+blue = "#6699cc"
+cyan = "#5fb3b3"
+green = "#99C794"
+magenta = "#c594c5"
+red = "#EC5f67"
+white = "#d8dee9"
+yellow = "#FAC863"
+
+[schemes.OceanicNext.cursor]
+cursor = "#ffffff"
+text = "#1b2b34"
+
+[schemes.OceanicNext.normal]
+black = "#343d46"
+blue = "#6699cc"
+cyan = "#5fb3b3"
+green = "#99C794"
+magenta = "#c594c5"
+red = "#EC5f67"
+white = "#d8dee9"
+yellow = "#FAC863"
+
+[schemes.OceanicNext.primary]
+background = "#1b2b34"
+foreground = "#d8dee9"
+
+[schemes.OneNord.bright]
+black = "0x4C566A"
+blue = "0x81A1C1"
+cyan = "0x8FBCBB"
+green = "0xA3BE8C"
+magenta = "0xB988B0"
+red = "0xBF616A"
+white = "0xECEFF4"
+yellow = "0xEBCB8B"
+
+[schemes.OneNord.hints.end]
+background = "#4C566A"
+foreground = "#81A1C1"
+
+[schemes.OneNord.hints.start]
+background = "#4C566A"
+foreground = "#B988B0"
+
+[schemes.OneNord.normal]
+black = "0x3B4252"
+blue = "0x81A1C1"
+cyan = "0x88C0D0"
+green = "0xA3BE8C"
+magenta = "0xB988B0"
+red = "0xBF616A"
+white = "0xE5E9F0"
+yellow = "0xEBCB8B"
+
+[schemes.OneNord.primary]
+background = "0x19212F"
+foreground = "0xC8D0E0"
+
+[schemes.OneNord.search.focused_match]
+background = "#4C566A"
+foreground = "#EBCB8B"
+
+[schemes.OneNord.search.footer_bar]
+background = "#434C5E"
+foreground = "#88C0D0"
+
+[schemes.OneNord.search.matches]
+background = "#4C566A"
+foreground = "#81A1C1"
+
+[schemes.OneNord.selection]
+background = "#3F4758"
+text = "CellForeground"
+
+[schemes.Palenight.bright]
+black = "#434758"
+blue = "#9cc4ff"
+cyan = "#a3f7ff"
+green = "#ddffa7"
+magenta = "#e1acff"
+red = "#ff8b92"
+white = "#ffffff"
+yellow = "#ffe585"
+
+[schemes.Palenight.normal]
+black = "#292d3e"
+blue = "#82aaff"
+cyan = "#89ddff"
+green = "#c3e88d"
+magenta = "#c792ea"
+red = "#f07178"
+white = "#d0d0d0"
+yellow = "#ffcb6b"
+
+[schemes.Palenight.primary]
+background = "#292d3e"
+foreground = "#d0d0d0"
+
+[schemes.SolarizedDark.bright]
+black = "#002b36"
+blue = "#839496"
+cyan = "#93a1a1"
+green = "#586e75"
+magenta = "#6c71c4"
+red = "#cb4b16"
+white = "#fdf6e3"
+yellow = "#657b83"
+
+[schemes.SolarizedDark.cursor]
+cursor = "#839496"
+text = "#002b36"
+
+[schemes.SolarizedDark.normal]
+black = "#073642"
+blue = "#268bd2"
+cyan = "#2aa198"
+green = "#859900"
+magenta = "#d33682"
+red = "#dc322f"
+white = "#eee8d5"
+yellow = "#b58900"
+
+[schemes.SolarizedDark.primary]
+background = "#002b36"
+foreground = "#839496"
+
+[schemes.SolarizedLight.bright]
+black = "#002b36"
+blue = "#839496"
+cyan = "#93a1a1"
+green = "#586e75"
+magenta = "#6c71c4"
+red = "#cb4b16"
+white = "#fdf6e3"
+yellow = "#657b83"
+
+[schemes.SolarizedLight.cursor]
+cursor = "#657b83"
+text = "#fdf6e3"
+
+[schemes.SolarizedLight.normal]
+black = "#073642"
+blue = "#268bd2"
+cyan = "#2aa198"
+green = "#859900"
+magenta = "#d33682"
+red = "#dc322f"
+white = "#eee8d5"
+yellow = "#b58900"
+
+[schemes.SolarizedLight.primary]
+background = "#fdf6e3"
+foreground = "#657b83"
+
+[schemes.SpaceDuck.bright]
+black = "#686f9a"
+blue = "#00a3cc"
+cyan = "#7a5ccc"
+green = "#5ccc96"
+magenta = "#f2ce00"
+red = "#e33400"
+white = "#f0f1ce"
+yellow = "#b3a1e6"
+
+[schemes.SpaceDuck.normal]
+black = "#000000"
+blue = "#00a3cc"
+cyan = "#7a5ccc"
+green = "#5ccc96"
+magenta = "#f2ce00"
+red = "#e33400"
+white = "#686f9a"
+yellow = "#b3a1e6"
+
+[schemes.SpaceDuck.primary]
+background = "#0f111b"
+foreground = "#ecf0c1"
+
+[schemes.TomorrowNight.bright]
+black = "#666666"
+blue = "#81a2be"
+cyan = "#54ced6"
+green = "#9ec400"
+magenta = "#b77ee0"
+red = "#ff3334"
+white = "#282a2e"
+yellow = "#f0c674"
+
+[schemes.TomorrowNight.cursor]
+cursor = "#ffffff"
+text = "#1d1f21"
+
+[schemes.TomorrowNight.normal]
+black = "#1d1f21"
+blue = "#81a2be"
+cyan = "#70c0ba"
+green = "#b5bd68"
+magenta = "#b294bb"
+red = "#cc6666"
+white = "#373b41"
+yellow = "#e6c547"
+
+[schemes.TomorrowNight.primary]
+background = "#1d1f21"
+foreground = "#c5c8c6"
+

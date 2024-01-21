@@ -20,6 +20,9 @@ export TERMINAL="alacritty"
 export QT_QPA_PLATFORMTHEME="gtk2"
 export EDITOR="nvim"
 export BROWSER="firefox-bin"
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+export GBDKDIR=/opt/gbdk/
 
 # Proton Discord RPC fix
 export WINEDLLPATH=$WINEDLLPATH:/opt/discord-rpc/bin64:/opt/discord-rpc/bin32

@@ -1,1 +1,1 @@
-exec /usr/local/bin/startdwm
+exec /usr/local/bin/dwm
