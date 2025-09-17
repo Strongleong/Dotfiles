@@ -1,0 +1,10 @@
+#!/bin/sh
+
+case "$1" in
+  "English (US)")
+    echo 0
+    ;;
+  "Russian")
+    echo 1
+    ;;
+esac

@@ -1,0 +1,21 @@
+#!/bin/sh
+
+
+data=$1
+echo $data
+cover_url=$(echo $data | jq -r '."mpris:artUrl"')
+prefix='http'
+
+if [[ "$cover_url" =~ ^"$prefix" ]]; then
+  cover=${cover_url:7}
+  cover=${cover##/*/}
+
+  if [ ! -f "/tmp/$cover" ]; then
+    wget -qO "/tmp/$cover" "$cover_url"
+  fi
+
+  echo $data | jq -rjM ".\"mpris:artUrl\" = \"file:///tmp/$cover\""
+  exit
+fi
+
+echo $data

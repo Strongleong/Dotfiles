@@ -1,0 +1,10 @@
+#!/bin/bash
+
+SCRIPT_ROOT=$(dirname $0)
+
+IFS='|' read title class < <(echo $(hyprctl activewindow -j | jq -r '.title, .class' | sed -z 's/\n/|/g'))
+$SCRIPT_ROOT/return_window_data_json "$class" "$title"
+
+socat -u UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - |
+  stdbuf -o0 awk -F '>>|,' '/^activewindow>>/{system("'"$SCRIPT_ROOT"'/return_window_data_json '"'"'"$2"'"'"' "  "'"'"'"$3"'"'"'")}'
+

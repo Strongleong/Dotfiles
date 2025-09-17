@@ -1,0 +1,176 @@
+$background-darker: rgba(30, 31, 41, 230);
+$background: #282a36;
+$selection: #44475a;
+$foreground: #f8f8f2;
+$comment: #6272a4;
+$cyan: #8be9fd;
+$green: #50fa7b;
+$orange: #ffb86c;
+$pink: #ff79c6;
+$purple: #bd93f9;
+$red: #ff5555;
+$yellow: #f1fa8c;
+
+*{
+  // all: unset;
+  font-family: feather;
+  font-family: CaskaydiaCove Nerd Font;
+}
+
+window {
+  background-color: $background-darker;
+  font-size: 18px;
+  border-radius: 10px;
+  color: $foreground;
+}
+
+.bar {
+  padding-left: 10px;
+  padding-right: 10px;
+
+}
+
+.cal-in {
+  padding: 0px 10px 0px 10px;
+  color: $foreground;
+}
+
+calendar {
+  padding: 5px 5px 5px 5px;
+  margin-left: 10px;
+  font-size: 18px;
+  font-weight: normal;
+
+  &:selected {
+    background-image: linear-gradient(0deg, $purple, $selection);
+    border-radius: 10px;
+  }
+
+  &.header {
+    color: $purple;
+    font-weight: bold;
+  }
+
+  &.button {
+    color: $green;
+  }
+
+  &.highlight {
+    color: $cyan;
+    font-weight: bold;
+    padding: 20px;
+  }
+
+  &:indeterminate {
+    color: $comment;
+  }
+}
+
+box {
+    margin: 0px 0px 0px 0px;
+    border-radius: 3px;
+}
+
+tooltip.background {
+    background-color: $background;
+    font-size: 18;
+    border-radius: 10px;
+    color: $cyan;
+}
+
+tooltip label {
+    margin: 6px;
+}
+
+.workspaces-widget {
+  // background-color: $background;
+
+  .workspace-entry {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .occupied {
+    color: $foreground;
+  }
+
+  .empty {
+    color: $selection;
+  }
+
+  .current {
+    color: $purple;
+  }
+}
+
+.workspace-event:hover {
+  .workspace-entry {
+    background-image: linear-gradient(0deg, $purple, $selection);
+    color: $foreground;
+  }
+}
+
+.cover {
+  background-blend-mode: multiply;
+  transition: background-color 0.2s ease;
+  background-size: cover;
+  background-position: center;
+
+  &-paused {
+    background-color: $comment;
+  }
+}
+
+.music {
+  &_cover {
+    border-radius: 100px;
+    min-height: 24px;
+    min-width: 24px;
+    margin: 2px;
+  }
+}
+
+.player {
+  &__cover {
+    min-height: 100px;
+    box-shadow: 5px 5px 5px 5px #06060b;
+    min-width: 170px;
+    margin: 20px;
+    border-radius: 20px;
+  }
+
+  &__title {
+    color: $purple;
+    font-size : 20px;
+    font-weight : bold;
+    margin : 20px 0px 0px -15px;
+  }
+
+  &__artist {
+    color: $cyan;
+    font-size : 16px;
+    font-weight : normal;
+    margin : 0px 0px 0px 0px;
+  }
+}
+
+.cool_circle {
+  border-radius: 10px;
+  background-color: $selection;
+}
+
+.mem_circle {
+  color: $orange;
+
+  .cool_circle__button {
+    color: $orange;
+  }
+}
+
+.cpu_circle {
+  color: $green;
+
+  .cool_circle__button {
+    color: $yellow;
+  }
+}

@@ -4,7 +4,7 @@ if [ -f /tmp/dwm_started ]; then
   exit
 fi
 
-touch /tmp/dwm_started
+/bin/touch /tmp/dwm_started
 
 /usr/bin/xrandr --auto --output HDMI1 --mode 1920x1080 --right-of eDP1 &
 /usr/bin/setxkbmap -layout 'us,ru' -option 'grp:alt_shift_toggle' &
@@ -20,4 +20,8 @@ touch /tmp/dwm_started
 /bin/sh -c '/usr/lib/polkit-kde-authentication-agent-1 &' &
 /usr/bin/unclutter &
 /usr/bin/numlockx on &
-pgrep -x ssh-agent > /dev/null || ssh-agent -a $SSH_AUTH_SOCK
+
+/bin/mkfifo /tmp/wobpipe
+/bin/tail -f | /usr/bin/wob
+
+/bin/pgrep -x ssh-agent > /dev/null || /bin/ssh-agent -a $SSH_AUTH_SOCK

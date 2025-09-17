@@ -1,0 +1,23 @@
+#!/bin/sh
+
+PLAYERCTL=/usr/bin/playerctl
+SCRIPT_ROOT=$(dirname $0)
+
+data=(
+  "status"
+  "title"
+  "artist"
+  "mpris:artUrl"
+  "position"
+  "mpris:length"
+)
+
+json='{'
+
+for d in "${data[@]}"; do
+  json="$json \"$d\": \"{{$d}}\","
+done
+
+json="${json::-1}}"
+
+$PLAYERCTL metadata --format "$json" $@ # | stdbuf -o0 echo # "$SCRIPT_ROOT/handle_url_images"

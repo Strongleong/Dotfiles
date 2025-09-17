@@ -35,6 +35,7 @@ source "$ZDOTDIR/functions.sh"
 zsh_add_file "exports.sh"
 zsh_add_file "aliases.sh"
 zsh_add_file "prompt.sh"
+zsh_add_file "ssh-agent.sh"
 
 
 # FZF
@@ -59,13 +60,14 @@ compinit -u
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
 zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
 zsh_add_plugin "hlissner/zsh-autopair"
-zsh_add_plugin "hcgraf/zsh-sudo"
-zsh_add_plugin "casonadams/alacritty-shell"
 # zsh_add_plugin "keithhamilton/oh-my-dogesh"
-zsh_add_plugin "mbenford/zsh-tmux-auto-title"
 zsh_add_plugin "jsahlen/tmux-vim-integration.plugin.zsh"
 zsh_add_plugin "softmoth/zsh-vim-mode"
 zsh_add_plugin "lukechilds/zsh-nvm"
+
+if [ -n "$TMUX" ]; then
+  zsh_add_plugin "mbenford/zsh-tmux-auto-title"
+fi
 
 fpath=(./zsh-completions/src $fpath)
 
@@ -126,3 +128,5 @@ compdef _dotnet_zsh_complete dotnet
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # phpenv
+
+source ~/.config/zsh/eww

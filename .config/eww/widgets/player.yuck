@@ -1,0 +1,26 @@
+(defwidget player []
+  (box :class "player" :orientation "horizontal" :space-evenly false :vexpand false :hexpand true
+    (box
+      :style "background-image: url('${music?.['mpris:artUrl']}')"
+      :visible { music?.['mpris:artUrl'] == "" ? false : true }
+      :vexpand false
+      :hexpand false
+      :class "player__cover cover ${ music.status == 'Playing' ? 'cover-playing' : 'cover-paused' }"
+    )
+
+    (box
+      :space-evenly false
+      :orientation "vertical"
+      :spacing 20
+      :valign "center"
+      :vexpand "false"
+      :hexpand "true"
+      (label :class "player__title"  :halign "center" :wrap "true" :text "${music.title}")
+      (label :class "player__artist" :halign "center" :wrap "true" :text "${music.artist}")
+
+      (box :space-evenly false :halign "center" :spacing 15 :vexpand false :hexpand false
+        (audio_control)
+      )
+    )
+  )
+)

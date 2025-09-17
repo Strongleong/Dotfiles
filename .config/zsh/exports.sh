@@ -10,17 +10,20 @@ export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_HOME=$HOME/.local/state
 
 # Random stuff that I like
-export PATH="$HOME/.local/bin":$PATH
 export MANPAGER='nvim +Man!'
 export MANWIDTH=999
+export PATH="$HOME/.local/bin":$PATH
 export PATH=$HOME/.local/share/go/bin:$PATH
 export PATH="$PATH:./node_modules/.bin"
-export TERM=alacritty
-export TERMINAL="alacritty"
+export PATH="$PATH:/opt/android-sdk/platform-tools/"
+export PATH="$PATH:/opt/android-sdk/tools/bin/"
+export PATH="$PATH:/opt/android-sdk/emulator/"
 export QT_QPA_PLATFORMTHEME="gtk2"
 export EDITOR="nvim"
 export BROWSER="firefox-bin"
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+export ANDROID_HOME="/opt/android-sdk"
+export GRIMBLAST_EDITOR="satty -f"
 
 export GBDKDIR=/opt/gbdk/
 
@@ -48,3 +51,4 @@ export WINEPREFIX="$XDG_DATA_HOME"/wine
 export XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc
 export ERRFILE="$XDG_CACHE_HOME/X11/xsession-errors"
 export HISTFILE="$XDG_STATE_HOME"/zsh/history
+export GPG_TTY=$(tty)

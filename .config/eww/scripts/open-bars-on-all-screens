@@ -1,0 +1,7 @@
+#!/bin/sh
+
+MON_COUNT=$(hyprctl monitors | grep Monitor | wc -l);
+
+for i in $(seq 0 $(($MON_COUNT-1))); do
+  eww open bar --screen "$i" --id "$i"
+done

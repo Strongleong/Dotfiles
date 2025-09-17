@@ -1,0 +1,15 @@
+;; (defvar layout_index 0)
+
+(deflisten layout_index
+  :initial 0
+  "bash ~/.config/eww/scripts/get-keyboard-layouts"
+)
+
+(defwidget keyboard []
+  (eventbox :onclick "${EWW_CONFIG_DIR}/scripts/switch_keyboard" :cursor "pointer"
+    (stack :selected layout_index :transition "slidedown"
+      (label :text "🇺🇲")
+      (label :text "🇷🇺")
+    )
+  )
+)

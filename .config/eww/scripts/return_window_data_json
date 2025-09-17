@@ -1,0 +1,29 @@
+#!/bin/bash
+
+class=$1
+title=$2
+
+title=${title/" — Mozilla Firefox"/}
+title=${title/" — Zen Browser"/}
+title=${title/" - TMUX"/}
+
+title_lower="$(echo $title | awk '{print tolower($0)}')"
+desktop_file_class="/usr/share/applications/$class.desktop"
+desktop_file_title="/usr/share/applications/$title_lower.desktop"
+
+if [ -f $desktop_file_class ]; then
+  icon=$(cat $desktop_file_class | awk -F= '/Icon=/{print $2}' | head -n1)
+elif [ -f "$desktop_file_title" ]; then
+  icon=$(cat $desktop_file_title | awk -F= '/Icon=/{print $2}' | head -n1)
+elif [ -n "$title" ]; then
+  icon="$title_lower"
+elif [ -z "$title" ]; then
+  icon='application-default-icon'
+  title='Linux application'
+fi
+
+if [[ "$icon" == "org.telegram.desktop"  ]]; then
+  icon="telegram"
+fi
+
+echo "{\"icon\": \"$icon\", \"title\": \"$title\"}"

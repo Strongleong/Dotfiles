@@ -1,0 +1,6 @@
+#!/bin/sh
+
+data=$(upower -i /org/freedesktop/UPower/devices/battery_BAT0)
+icon=$(echo "$data" | grep 'icon-name'  | sed "s/\s*icon-name:\s*'\(.*\)'/\1/")
+perc=$(echo "$data" | grep 'percentage' | sed "s/\s*percentage:\s*\(.*\)/\1/")
+echo "{\"icon\": \"$icon\", \"perc\": \"$perc\"}"

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+asciimoji -l | awk -F '=' '{st = index($0,"=");print "label="$1" "substr($0,st+1)";exec=asciimoji "$1" | wl-copy"}'

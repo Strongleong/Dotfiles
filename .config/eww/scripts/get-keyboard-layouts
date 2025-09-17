@@ -1,0 +1,6 @@
+#!/bin/sh
+
+SCRIPT_ROOT=$(dirname $0)
+
+socat -u UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - |
+  stdbuf -o0 awk -F '>>|,' '/^activelayout>>/{system("'"$SCRIPT_ROOT"'/set-keyboard-icon '"'"'"$3"'"'"'")}'

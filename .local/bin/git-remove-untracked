@@ -1,0 +1,3 @@
+#!/bin/sh
+
+git list-untracked | xargs git branch -d

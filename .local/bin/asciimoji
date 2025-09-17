@@ -1,0 +1,503 @@
+#!/usr/bin/env python3
+
+"""
+Asciimoji - tool to get asciimoji by its name
+
+Check `usage()` fucntion, or run `asciimoji -h` to see flags
+
+Examples:
+  asciimoji --help
+  asciimoji --list | grep 'cat' # the dumb way
+  asciimoji cat | xclip -sel clip #XOrg
+  asciimoji -s cat | wl-copy #Wayland
+
+Changelog:
+  * v1.2.1
+    - Outputing message 'asciimoji not found' in stderr
+
+  * v1.2.0
+    - Added ability to find asciimoji by partial name
+    - Added flag -s
+
+  * v1.1.0
+    - Added flag -l
+
+  * v1.0.0
+    - Added flags -h -v
+    - Added ability to get asciimoji by its name
+
+Licence:
+The MIT License (MIT)
+
+Copyright (c) 2025 Nikita (strongleong) Chulkov
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+"""
+
+import sys
+import fnmatch
+from typing import Callable
+
+VERSION = "1.2.1"
+
+
+emojis: dict[str, str] = {
+    'acid': r"""⊂(◉‿◉)つ""",
+    'afraid': r"""(ㆆ _ ㆆ)""",
+    'alpha': r"""α""",
+    'angel': r"""☜(⌒▽⌒)☞""",
+    'angry': r"""•`_´•""",
+    'arrowhead': r"""⤜(ⱺ ʖ̯ⱺ)⤏""",
+    'apple': r"""""",
+    'ass': r"""(‿|‿)""",
+    'butt': r"""(‿|‿)""",
+    'awkward': r"""•͡˘㇁•͡˘""",
+    'bat': r"""/|\ ^._.^ /|\'""",
+    'bear': r"""ʕ·͡ᴥ·ʔ﻿""",
+    'koala': r"""ʕ·͡ᴥ·ʔ﻿""",
+    'bearflip': r"""ʕノ•ᴥ•ʔノ ︵ ┻━┻""",
+    'bearhug': r"""ʕっ•ᴥ•ʔっ""",
+    'because': r"""∵""",
+    'since': r"""∵""",
+    'beta': r"""β""",
+    'bigheart': r"""❤""",
+    'bitcoin': r"""₿""",
+    'blackeye': r"""0__#""",
+    'blubby': r"""( 0 _ 0 )""",
+    'blush': r"""(˵ ͡° ͜ʖ ͡°˵)""",
+    'bond': r"""┌( ͝° ͜ʖ͡°)=ε/̵͇̿̿/’̿’̿""",
+    '007': r"""┌( ͝° ͜ʖ͡°)=ε/̵͇̿̿/’̿’̿""",
+    'boobs': r"""( . Y . )""",
+    'bored': r"""(-_-)""",
+    'bribe': r"""( •͡˘ _•͡˘)ノð""",
+    'bubbles': r"""( ˘ ³˘)ノ°ﾟº❍｡""",
+    'butterfly': r"""ƸӜƷ""",
+    'cat': r"""(= ФェФ=)""",
+    'catlenny': r"""( ͡° ᴥ ͡°)﻿""",
+    'check': r"""✔""",
+    'cheer': r"""※\(^o^)/※""",
+    'chubby': r"""╭(ʘ̆~◞౪◟~ʘ̆)╮""",
+    'claro': r"""(͡ ° ͜ʖ ͡ °)""",
+    'clique': r"""ヽ༼ ຈل͜ຈ༼ ▀̿̿Ĺ̯̿̿▀̿ ̿༽Ɵ͆ل͜Ɵ͆ ༽ﾉ""",
+    'gang': r"""ヽ༼ ຈل͜ຈ༼ ▀̿̿Ĺ̯̿̿▀̿ ̿༽Ɵ͆ل͜Ɵ͆ ༽ﾉ""",
+    'squad': r"""ヽ༼ ຈل͜ຈ༼ ▀̿̿Ĺ̯̿̿▀̿ ̿༽Ɵ͆ل͜Ɵ͆ ༽ﾉ""",
+    'cloud': r"""☁""",
+    'club': r"""♣""",
+    'coffee': r"""c[_]""",
+    'cuppa': r"""c[_]""",
+    'cmd': r"""⌘""",
+    'command': r"""⌘""",
+    'cool': r"""(•_•) ( •_•)>⌐■-■ (⌐■_■)""",
+    'csi': r"""(•_•) ( •_•)>⌐■-■ (⌐■_■)""",
+    'copy': r"""©""",
+    'c': r"""©""",
+    'creep': r"""ԅ(≖‿≖ԅ)""",
+    'creepcute': r"""ƪ(ړײ)‎ƪ​​""",
+    'crim3s': r"""( ✜︵✜ )""",
+    'cross': r"""†""",
+    'cry': r"""(╥﹏╥)""",
+    'crywave': r"""( ╥﹏╥) ノシ""",
+    'cute': r"""(｡◕‿‿◕｡)""",
+    'd1': r"""⚀""",
+    'd2': r"""⚁""",
+    'd3': r"""⚂""",
+    'd4': r"""⚃""",
+    'd5': r"""⚄""",
+    'd6': r"""⚅""",
+    'dab': r"""ヽ( •_)ᕗ""",
+    'damnyou': r"""(ᕗ ͠° ਊ ͠° )ᕗ""",
+    'dance': r"""ᕕ(⌐■_■)ᕗ ♪♬""",
+    'dead': r"""x⸑x""",
+    'dealwithit': r"""(⌐■_■)""",
+    'dwi': r"""(⌐■_■)""",
+    'delta': r"""Δ""",
+    'depressed': r"""(︶︹︶)""",
+    'derp': r"""☉ ‿ ⚆""",
+    'diamond': r"""♦""",
+    'dj': r"""d[-_-]b""",
+    'dog': r"""(◕ᴥ◕ʋ)""",
+    'dollar': r"""$""",
+    'dollarbill': r"""[̲̅$̲̅(̲̅ιο̲̅̅)̲̅$̲̅]""",
+    '$': r"""[̲̅$̲̅(̲̅ιο̲̅̅)̲̅$̲̅]""",
+    'dong': r"""(̿▀̿ ̿Ĺ̯̿̿▀̿ ̿)̄""",
+    'donger': r"""ヽ༼ຈل͜ຈ༽ﾉ""",
+    'dontcar': r"""(- ʖ̯-)',e""",
+    'idc': r"""(- ʖ̯-)""",
+    'dontwant': r"""ヽ(｀Д´)ﾉ""",
+    'dope': r"""<(^_^)>""",
+    '<<': r"""«""",
+    '>>': r"""»""",
+    'doubleflat': r"""𝄫""",
+    'doublesharp': r"""𝄪""",
+    'doubletableflip': r"""┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻""",
+    'down': r"""↓""",
+    'duckface': r"""(・3・)""",
+    'duel': r"""ᕕ(╭ರ╭ ͟ʖ╮•́)⊃¤=(————-""",
+    'duh': r"""(≧︿≦)""",
+    'dunno': r"""¯\(°_o)/¯""",
+    'ebola': r"""ᴇʙᴏʟᴀ""",
+    'eeriemob': r"""(-(-_-(-_(-_(-_-)_-)-_-)_-)_-)-)""",
+    'ellipsis': r"""…""",
+    '...': r"""…""",
+    'emdash': r"""–""",
+    '--': r"""–""",
+    'emptystar': r"""☆""",
+    'emptytriangle': r"""△""",
+    't2': r"""△""",
+    'endure': r"""(҂◡_◡) ᕤ""",
+    'envelope': r"""✉︎""",
+    'letter': r"""✉︎""",
+    'epsilon': r"""ɛ""",
+    'euro': r"""€""",
+    'evil': r"""ψ(｀∇´)ψ""",
+    'evillenny': r"""(͠≖ ͜ʖ͠≖)""",
+    'excited': r"""(ﾉ◕ヮ◕)ﾉ*:・ﾟ✧""",
+    'execution': r"""(⌐■_■)︻╦╤─ (╥﹏╥)""",
+    'facebook': r"""(╯°□°)╯︵ ʞooqǝɔɐɟ""",
+    'facepalm': r"""(－‸ლ)""",
+    'fancytext': r"""вєωαяє, ι αм ƒαη¢у!""",
+    'fart': r"""(ˆ⺫ˆ๑)<3""",
+    'fight': r"""(ง •̀_•́)ง""",
+    'finn': r"""| (• ◡•)|""",
+    'fish': r"""<"(((<3""",
+    '5': r"""卌""",
+    'five': r"""卌""",
+    '5/8': r"""⅝""",
+    'flat': r"""♭""",
+    'bemolle': r"""♭""",
+    'flexing': r"""ᕙ(`▽´)ᕗ""",
+    'fliptext': r"""ǝןqɐʇ ɐ ǝʞıן ǝɯ dıןɟ""",
+    'fliptexttable': r"""(ノ ゜Д゜)ノ ︵ ǝןqɐʇ ɐ ǝʞıן ʇxǝʇ dıןɟ""",
+    'flipped': r"""┬─┬﻿ ︵ /(.□. \）""",
+    'heavytable': r"""┬─┬﻿ ︵ /(.□. \）""",
+    'flower': r"""(✿◠‿◠)""",
+    'flor': r"""(✿◠‿◠)""",
+    'f': r"""✿""",
+    'fly': r"""─=≡Σ((( つ◕ل͜◕)つ""",
+    'friendflip': r"""(╯°□°)╯︵ ┻━┻ ︵ ╯(°□° ╯)""",
+    'frown': r"""(ღ˘⌣˘ღ)""",
+    'fuckoff': r"""୧༼ಠ益ಠ╭∩╮༽""",
+    'gtfo': r"""୧༼ಠ益ಠ╭∩╮༽""",
+    'fuckyou': r"""┌П┐(ಠ_ಠ)""",
+    'fu': r"""┌П┐(ಠ_ಠ)""",
+    'gentleman': r"""ಠ_ರೃ""",
+    'sir': r"""ಠ_ರೃ""",
+    'monocle': r"""ಠ_ರೃ""",
+    'ghast': r"""= _ =""",
+    'ghost': r"""༼ つ ╹ ╹ ༽つ""",
+    'gift': r"""(´・ω・)っ由""",
+    'present': r"""(´・ω・)っ由""",
+    'gimme': r"""༼ つ ◕_◕ ༽つ""",
+    'givemeyourmoney': r"""(•-•)⌐""",
+    'glitter': r"""(*・‿・)ノ⌒*:･ﾟ✧""",
+    'glasses': r"""(⌐ ͡■ ͜ʖ ͡■)""",
+    'glassesoff': r"""( ͡° ͜ʖ ͡°)ﾉ⌐■-■""",
+    'glitterderp': r"""(ﾉ☉ヮ⚆)ﾉ ⌒*:･ﾟ✧""",
+    'gloomy': r"""(_゜_゜_)""",
+    'goatse': r"""(з๏ε)""",
+    'gotit': r"""(☞ﾟ∀ﾟ)☞""",
+    'greet': r"""( ´◔ ω◔`) ノシ""",
+    'greetings': r"""( ´◔ ω◔`) ノシ""",
+    'gun': r"""︻╦╤─""",
+    'mg': r"""︻╦╤─""",
+    'hadouken': r"""༼つಠ益ಠ༽つ ─=≡ΣO))""",
+    'hammerandsickle': r"""☭""",
+    'hs': r"""☭""",
+    'handleft': r"""☜""",
+    'hl': r"""☜""",
+    'handright': r"""☞""",
+    'hr': r"""☞""",
+    'haha': r"""٩(^‿^)۶""",
+    'happy': r"""٩( ๑╹ ꇴ╹)۶""",
+    'happygarry': r"""ᕕ( ᐛ )ᕗ""",
+    'h': r"""♥""",
+    'heart': r"""♥""",
+    'hello'  'ohai': r"""(ʘ‿ʘ)╯""",
+    'ohai': r"""(ʘ‿ʘ)╯""",
+    'bye': r"""(ʘ‿ʘ)╯""",
+    'help': r"""\(°Ω°)/""",
+    'highfive': r"""._.)/\(._.""",
+    'hitting': r"""( ｀皿´)｡ﾐ/""",
+    'hug': r"""(づ｡◕‿‿◕｡)づ""",
+    'hugs': r"""(づ｡◕‿‿◕｡)づ""",
+    'iknowright': r"""┐｜･ิω･ิ#｜┌""",
+    'ikr': r"""┐｜･ิω･ิ#｜┌""",
+    'illuminati': r"""୧(▲ᴗ▲)ノ""",
+    'infinity': r"""∞""",
+    'inf': r"""∞""",
+    'inlove': r"""(っ´ω`c)♡""",
+    'int': r"""∫""",
+    'internet': r"""ଘ(੭*ˊᵕˋ)੭* ̀ˋ ɪɴᴛᴇʀɴᴇᴛ""",
+    'interrobang': r"""‽""",
+    'jake': r"""(❍ᴥ❍ʋ)""",
+    'kappa': r"""(¬,‿,¬)""",
+    'kawaii': r"""≧◡≦""",
+    'keen': r"""┬┴┬┴┤Ɵ͆ل͜Ɵ͆ ༽ﾉ""",
+    'kiahh': r"""~\(≧▽≦)/~""",
+    'kiss': r"""(づ ￣ ³￣)づ""",
+    'kyubey': r"""／人◕ ‿‿ ◕人＼""",
+    'lambda': r"""λ""",
+    'lazy': r"""_(:3」∠)_""",
+    'left': r"""←""",
+    '<-': r"""←""",
+    'lenny': r"""( ͡° ͜ʖ ͡°)""",
+    'lennybill': r"""[̲̅$̲̅(̲̅ ͡° ͜ʖ ͡°̲̅)̲̅$̲̅]""",
+    'lennyfight': r"""(ง ͠° ͟ʖ ͡°)ง""",
+    'lennyflip': r"""(ノ ͡° ͜ʖ ͡°ノ) ︵ ( ͜。 ͡ʖ ͜。)""",
+    'lennygang': r"""( ͡°( ͡° ͜ʖ( ͡° ͜ʖ ͡°)ʖ ͡°) ͡°)""",
+    'lennyshrug': r"""¯\_( ͡° ͜ʖ ͡°)_/¯""",
+    'lennysir': r"""( ಠ ͜ʖ ರೃ)""",
+    'lennystalker': r"""┬┴┬┴┤( ͡° ͜ʖ├┬┴┬┴""",
+    'lennystrong': r"""ᕦ( ͡° ͜ʖ ͡°)ᕤ""",
+    'lennywizard': r"""╰( ͡° ͜ʖ ͡° )つ──☆*:・ﾟ""",
+    'loading': r"""███▒▒▒▒▒▒▒""",
+    'lol': r"""L(° O °L)""",
+    'look': r"""(ಡ_ಡ)☞""",
+    'loud': r"""ᕦ(⩾﹏⩽)ᕥ""",
+    'noise': r"""ᕦ(⩾﹏⩽)ᕥ""",
+    'love': r"""♥‿♥""",
+    'lovebear': r"""ʕ♥ᴥ♥ʔ""",
+    'lumpy': r"""꒰ ꒡⌓꒡꒱""",
+    'luv': r"""-`ღ´-""",
+    'magic': r"""ヽ(｀Д´)⊃━☆ﾟ. * ･ ｡ﾟ,""",
+    'magicflip': r"""(/¯◡ ‿ ◡)/¯ ~ ┻━┻""",
+    'meep': r"""\(°^°)/""",
+    'meh': r"""ಠ_ಠ""",
+    'metal': r"""\m/,(> . <)_\m/""",
+    'rock': r"""\m/,(> . <)_\m/""",
+    'mistyeyes': r"""ಡ_ಡ""",
+    'monster': r"""༼ ༎ຶ ෴ ༎ຶ༽""",
+    'natural': r"""♮""",
+    'needle': r"""┌(◉ ͜ʖ◉)つ┣▇▇▇═──""",
+    'inject': r"""┌(◉ ͜ʖ◉)つ┣▇▇▇═──""",
+    'nerd': r"""(⌐⊙_⊙)""",
+    'nice': r"""( ͡° ͜ °)""",
+    'no': r"""→_←""",
+    'noclue': r"""／人◕ __ ◕人＼""",
+    'nom'  'yummy': r"""(っˆڡˆς)""",
+    'yummy': r"""(っˆڡˆς)""",
+    'delicious': r"""(っˆڡˆς)""",
+    'note': r"""♫""",
+    'sing': r"""♫""",
+    'nuclear': r"""☢""",
+    'radioactive': r"""☢""",
+    'nukular': r"""☢""",
+    'nyan': r"""~=[,,_,,]:3""",
+    'nyeh': r"""@^@""",
+    'ohshit': r"""( º﹃º )""",
+    'omega': r"""Ω""",
+    'omg': r"""◕_◕""",
+    '1/8': r"""⅛""",
+    '1/4': r"""¼""",
+    '1/2': r"""½""",
+    '1/3': r"""⅓""",
+    'opt': r"""⌥""",
+    'option': r"""⌥""",
+    'orly': r"""'눈_눈'""",
+    'ohyou': r"""(◞థ౪థ)ᴖ""",
+    'ou': r"""(◞థ౪థ)ᴖ""",
+    'peace': r"""✌(-‿-)✌""",
+    'victory': r"""✌(-‿-)✌""",
+    'pear': r"""(__>-""",
+    'pi': r"""π""",
+    'pingpong': r"""( •_•)O*¯`·.¸.·´¯`°Q(•_• )""",
+    'plain': r"""._.""",
+    'pleased': r"""(˶‾᷄ ⁻̫ ‾᷅˵)""",
+    'point': r"""(☞ﾟヮﾟ)☞""",
+    'pooh': r"""ʕ •́؈•̀)""",
+    'porcupine': r"""(•ᴥ• )́`́'́`́'́⻍""",
+    'pound': r"""£""",
+    'praise': r"""(☝ ՞ਊ ՞)☝""",
+    'punch': r"""O=('-'Q)""",
+    'rage': r"""t(ಠ益ಠt)""",
+    'mad': r"""t(ಠ益ಠt)""",
+    'rageflip': r"""(ノಠ益ಠ)ノ彡┻━┻""",
+    'rainbowcat': r"""(=^･ｪ･^=))ﾉ彡☆""",
+    'really': r"""ò_ô""",
+    'r': r"""®""",
+    'right': r"""→""",
+    '->': r"""→""",
+    'riot': r"""୧༼ಠ益ಠ༽୨""",
+    'rolldice': r"""⚂""",
+    'rolleyes': r"""(◔_◔)""",
+    'rose': r"""✿ڿڰۣ—""",
+    'run': r"""(╯°□°)╯""",
+    'sad': r"""ε(´סּ︵סּ`)з""",
+    'saddonger': r"""ヽ༼ຈʖ̯ຈ༽ﾉ""",
+    'sadlenny': r"""( ͡° ʖ̯ ͡°)""",
+    '7/8': r"""⅞""",
+    'sharp': r"""♯""",
+    'diesis': r"""♯""",
+    'shout': r"""╚(•⌂•)╝""",
+    'shrug': r"""¯\_(ツ)_/¯""",
+    'shy': r"""=^_^=""",
+    'sigma': r"""Σ""",
+    'skull': r"""☠""",
+    'smile': r"""ツ""",
+    'smiley': r"""☺︎""",
+    'smirk': r"""¬‿¬""",
+    'snowman': r"""☃""",
+    'sob': r"""(;´༎ຶД༎ຶ`)""",
+    'soviettableflip': r"""ノ┬─┬ノ ︵ ( \o°o)\\""",
+    'spade': r"""♠""",
+    'sqrt': r"""√""",
+    'squid': r"""<コ:彡""",
+    'star': r"""★""",
+    'strong': r"""ᕙ(⇀‸↼‶)ᕗ""",
+    'suicide': r"""ε/̵͇̿̿/’̿’̿ ̿(◡︵◡)""",
+    'sum': r"""∑""",
+    'sun': r"""☀""",
+    'surprised': r"""(๑•́ ヮ •̀๑)""",
+    'surrender': r"""\_(-_-)_/""",
+    'stalker': r"""┬┴┬┴┤(･_├┬┴┬┴""",
+    'swag': r"""(̿▀̿‿ ̿▀̿ ̿)""",
+    'sword': r"""o()xxxx[{::::::::::::::::::>""",
+    'tabledown': r"""┬─┬﻿ ノ( ゜-゜ノ)""",
+    'tableflip': r"""(ノ ゜Д゜)ノ ︵ ┻━┻""",
+    'tau': r"""τ""",
+    'tears': r"""(ಥ﹏ಥ)""",
+    'terrorist': r"""୧༼ಠ益ಠ༽︻╦╤─""",
+    'thanks': r"""\(^-^)/""",
+    'thankyou': r"""\(^-^)/""",
+    'ty': r"""\(^-^)/""",
+    'therefore': r"""⸫""",
+    'so': r"""⸫""",
+    'this': r"""( ͡° ͜ʖ ͡°)_/¯""",
+    '3/8': r"""⅜""",
+    'tiefighter': r"""|=-(¤)-=|""",
+    'tired': r"""(=____=)""",
+    'toldyouso': r"""☜(꒡⌓꒡)""",
+    'toldyou': r"""☜(꒡⌓꒡)""",
+    'toogood': r"""ᕦ(òᴥó)ᕥ""",
+    'tm': r"""™""",
+    'triangle': r"""▲""",
+    't': r"""▲""",
+    '2/3': r"""⅔""",
+    'unflip': r"""┬──┬ ノ(ò_óノ)""",
+    'up': r"""↑""",
+    'cool victory': r"""(๑•̀ㅂ•́)ง✧""",
+    'wat': r"""(ÒДÓױ)""",
+    'wave': r"""( * ^ *) ノシ""",
+    'whaa': r"""Ö""",
+    'whistle': r"""(っ^з^)♪♬""",
+    'whoa': r"""(°o•)""",
+    'why': r"""ლ(`◉◞౪◟◉‵ლ)""",
+    'witchtext': r"""WHΣИ $HΛLL WΣ †HЯΣΣ MΣΣ† ΛGΛ|И?""",
+    'woo': r"""＼(＾O＾)／""",
+    'wtf': r"""(⊙＿⊙')""",
+    'wut': r"""⊙ω⊙""",
+    'yay': r"""\( ﾟヮﾟ)/""",
+    'yeah': r"""(•̀ᴗ•́)و""",
+    'yes': r"""(•̀ᴗ•́)و""",
+    'yen': r"""¥""",
+    'yinyang': r"""☯""",
+    'yy': r"""☯""",
+    'yolo': r"""Yᵒᵘ Oᶰˡʸ Lᶤᵛᵉ Oᶰᶜᵉ""",
+    'youkids': r"""ლ༼>╭ ͟ʖ╮<༽ლ""",
+    'ukids': r"""ლ༼>╭ ͟ʖ╮<༽ლ""",
+    'y u no': r"""(屮ﾟДﾟ)屮 Y U NO""",
+    'yuno': r"""(屮ﾟДﾟ)屮 Y U NO""",
+    'zen': r"""⊹╰(⌣ʟ⌣)╯⊹""",
+    'meditation': r"""⊹╰(⌣ʟ⌣)╯⊹""",
+    'omm': r"""⊹╰(⌣ʟ⌣)╯⊹""",
+    'zoidberg': r"""(V) (°,,,,°) (V)""",
+    'zombie': r"""[¬º-°]¬""",
+}
+
+
+def eprint(str): return print(str, file=sys.stderr)
+
+
+def list_emojis() -> int:
+    for name in emojis:
+        print(f"{name}={emojis[name]}")
+
+    return 0
+
+
+def print_emoji(key: str, strict: bool = False) -> int:
+    if key not in emojis:
+        eprint(f"No asciimoji called '{key}' exists")
+        return 1
+
+    if strict:
+        print(emojis[key])
+        return 0
+
+    match = fnmatch.filter(emojis, f"*{key}*")
+
+    for m in match:
+        print(emojis[m])
+
+    return 0
+
+
+def usage(status_code: int = 0) -> int:
+    eprint("Usage: asciimoji [-h|-v|-l|<-s> emoji name]")
+    eprint("Flags:")
+    eprint("  -l --list      List every emoji and its name")
+    eprint("  -s --strict    Search asciimoji with exact name")
+    eprint("  -h --help      Show this usage")
+    eprint("  -v --version   Show version")
+    return status_code
+
+
+def version() -> int:
+    eprint(f"asciimoji {VERSION}")
+    return 0
+
+
+def parse_args() -> tuple[Callable[..., int], list[any]]:
+    if len(sys.argv) == 1:
+        return (usage, [])
+
+    strict_search = False
+
+    argc = 1
+    argv = sys.argv[argc]
+
+    if argv == "-h" or argv == "--help":
+        return (usage, [])
+
+    if argv == "-v" or argv == "--version":
+        return (version, [])
+
+    if argv == "-l" or argv == "--list":
+        return (list_emojis, [])
+
+    if argv == "-s" or argv == "--strict":
+        strict_search = True
+        argc += 1
+        argv = sys.argv[argc]
+
+    if argv[0] == '-':
+        eprint(f"ERROR: Unknown flag '{argv}'")
+        return (usage, [1])
+
+    key = ' '.join(sys.argv[argc:])
+    return (print_emoji, [key, strict_search])
+
+
+def main():
+    (fn, args) = parse_args()
+    return fn(*args)
+
+
+if __name__ == "__main__":
+    sys.exit(main())

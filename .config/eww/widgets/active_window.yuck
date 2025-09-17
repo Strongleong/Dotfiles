@@ -1,0 +1,7 @@
+(deflisten window :initial "{}" "sh ~/.config/eww/scripts/get-window-title")
+(defwidget window_w []
+  (defbox
+    (icon :name "${window.icon}" :class "window_icon")
+    (label :limit-width 40 :show-truncated true :text "${window.title}" :tooltip "${window.title}")
+  )
+)

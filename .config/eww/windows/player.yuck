@@ -1,0 +1,14 @@
+(defwindow player_win
+  :monitor 1
+  :geometry (geometry :x "15%"
+                      :y "10px"
+                      :width "25%"
+                      :height "200px"
+                      :anchor "top left")
+  :stacking "fg"
+  :exclusive true
+  :focusable false
+  :namespace "player"
+
+  (player)
+)

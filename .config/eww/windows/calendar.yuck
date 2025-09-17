@@ -1,0 +1,29 @@
+(defpoll calendar_day :interval "20h" "date '+%d'")
+(defpoll calendar_year :interval "20h" "date '+%Y'")
+
+(defwidget cal []
+  (box :class "cal" :orientation "v"
+    (box :class "cal-in"
+      (calendar
+        :class "cal"
+        :show-details true
+        :show-day-names true
+        :show-heading true
+      )
+    )
+  )
+)
+
+(defwindow calendar
+  :geometry (geometry :x "20px"
+                      :y "0%"
+                      :anchor "top right"
+                      :width "270px"
+                      :height "60px")
+  :namespace "calendar"
+  :stacking "fg"
+  :exclusive true
+  :focusable false
+  (cal)
+)
+

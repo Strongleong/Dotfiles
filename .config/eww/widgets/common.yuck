@@ -1,0 +1,46 @@
+(defwidget defbox [?halign ?class ?spacing]
+  (box
+    :spacing {spacing == '' ? 15 : spacing}
+    :space-evenly false
+    :halign "${halign ?: "baseline"}"
+    :class "${class ?: ""}"
+    (children)
+  )
+)
+
+(defwidget icon [name ?class]
+  (image
+    :icon name
+    :icon-size "dnd"
+    :class "${class ?: ""}"
+  )
+)
+
+(defwidget cool_circle [?class ?onclick ?tooltip value]
+  (box
+    :class "cool_circle ${class ?: ""}"
+    :vexpand true
+    :hexpand true
+    (circular-progress
+      :vexpand true
+      :hexpand true
+      :value "${value}"
+      :thickness 4
+      :class "cool_circle__circle"
+      (button
+        :class "cool_circle__button"
+        :tooltip "${tooltip ?: ""}"
+        :onclick "${onclick ?: ""}"
+        ""
+      )
+    )
+  )
+)
+
+(defwidget audio_control []
+  (box :space-evenly false :spacing 10
+    (button :width 15 :height 15 :class "player_btn player_btn_prev"   :onclick "playerctl previous" "")
+    (button :width 15 :height 15 :class "player_btn player_btn_toggle" :onclick "playerctl play-pause" { music.status == 'Playing' ? '' : '' })
+    (button :width 15 :height 15 :class "player_btn player_btn_next"   :onclick "playerctl next" "")
+  )
+)

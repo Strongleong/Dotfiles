@@ -1,0 +1,11 @@
+(defpoll battery_icon :initial '{"icon": "battery-missing-symbolic"}' :interval "1s" "bash ~/.config/eww/scripts/get_battery_icon")
+
+(defwidget battery []
+  (defbox :spacing 5
+    (image
+      :icon "${battery_icon.icon}"
+      :icon-size "dnd"
+    )
+    "${battery_icon.perc}"
+  )
+)

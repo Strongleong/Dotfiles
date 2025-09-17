@@ -15,6 +15,8 @@ alias fgrep='fgrep --color=auto'
 alias df='df -h'     # human-readable sizes
 alias free='free -m' # show sizes in MB
 
+alias dc="docker-compose"
+
 # Cleaning $HOME folder from useless dotfiles
 alias nvidia-settings=nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"

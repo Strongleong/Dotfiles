@@ -1,0 +1,30 @@
+(defwindow bar
+           :monitor 1
+           :geometry (geometry :x "0%"
+                               :y "10px"
+                               :width "98%"
+                               :height "30px"
+                               :anchor "top center")
+           :stacking "fg"
+           :exclusive true
+           :focusable false
+           :namespace "status-bar"
+  (centerbox
+    (defbox
+      (workspaces)
+      (music)
+    )
+
+    (defbox :halign "center"
+      (window_w)
+    )
+
+    (defbox :halign "end"
+      (pcstats)
+      (battery)
+      (clock)
+      (systray :spacing 5 :icon-size 20 :space-evenly true)
+      (keyboard)
+    )
+  )
+)

@@ -1,0 +1,23 @@
+(defvar date-visible false)
+(defpoll time :interval "1s"
+              :initial "00:00:00"
+  `date '+%H:%M:%S'`)
+(defpoll date :interval "1s"
+              :initial "0000-00-00"
+              :run-while date-visible
+  `date '+%Y-%m-%d'`)
+
+(defwidget clock []
+  (eventbox
+    :onhover "${EWW_CMD} update date-visible=true"
+    :onhoverlost "${EWW_CMD} update date-visible=false"
+    :onclick "${EWW_CONFIG_DIR}/scripts/toggle-window calendar"
+    (defbox
+      (label :text "${time}")
+
+      (revealer :reveal date-visible :transition "slideleft"
+        (label :text "${date}")
+      )
+    )
+  )
+)

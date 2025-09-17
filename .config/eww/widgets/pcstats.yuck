@@ -1,0 +1,23 @@
+(defwidget ram []
+  (cool_circle
+    :class "mem_circle"
+    :value "${EWW_RAM.used_mem_perc}"
+    :tooltip "Using ${round(EWW_RAM.used_mem_perc, 1)}% RAM"
+  )
+)
+
+(defpoll cpu_usage :interval "1s" :initial 0 "sh ~/.config/eww/scripts/get-cpu-usage")
+(defwidget cpu []
+  (cool_circle
+    :class "cpu_circle"
+    :value cpu_usage
+    :tooltip "using ${cpu_usage}% CPU"
+  )
+)
+
+(defwidget pcstats []
+  (box :hexpand false :vexpand false :space-evenly false :spacing 10
+    (cpu)
+    (ram)
+  )
+)
